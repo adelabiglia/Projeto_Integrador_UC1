@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+
+        <div class="conta">
+
+            <h1>Cadastre-se</h1>
+            <p>Você já tem um conta? <a href="#">Clique aqui</a></p>
+
+        </div>
+
+
+    <div class="container">
+        <div class="informacoes">
+
+            <h4>Informações pessoais</h4>
+
+        
+            <form>
+                
+                <label for="nome">Nome Completo:</label><br>
+                <input type="text" id="nome" name="nome" required><br><br>
+
+                <label for="data de nacimento" id="data" name="data" required>Data de nascimento</label><br>
+                <input type="date" id="data de nascimento" name="data de nascimento" required><br><br>
+
+                <label for="Endereço" id="endereço" name="endereço" required>Endereço</label><br>
+                <input type="text" id="rua" name="rua" placeholder="Rua" required>
+
+
+                <input type="number" id="numero" name="numero" placeholder="Numero" required><br>
+                
+                <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+            
+                <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+
+            </form>
+        </div>
+
+        <div class="logim">
+
+                <h2>Dados de Logim</h2>
+
+            <form action="#">
+                <label for="email">E-mail:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="senha">Senha:</label><br>
+                <input type="password" id="senha" name="senha" minlength="8" required><br><br>
+
+                <label for="confirmar senha">Confirmar Senha:</label><br>
+                <input type="password" id="confirmar senha" name="confirmar senha" minlength="8" required><br><br>
+
+                <input type="checkbox" name="promocoes" id="promocoes" value="sim">
+                <label for="promocoes">Desejo receber promoções e novidades por e-mail</label><br><br>
+
+                <button type="submit">Salvar e continuar</button>
+                
+            </form> 
+
+        </div>
+    </div>
+
+
+
+</body>
+</html>
