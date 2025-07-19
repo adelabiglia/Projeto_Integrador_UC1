@@ -1,0 +1,17 @@
+body{
+    margin: 0 ;   
+}
+
+.esboco{
+    background-color: yellowgreen;
+    padding: 10px 200px;
+    display: flex;
+    justify-content: flex-start;
+    line-height: 3;
+    
+    
+    
+}
+
+
+
