@@ -2,10 +2,18 @@
 
 body{
     background-color: #fffff0;
-    display: flex;
     padding: 150px;
 }
 
-.conta {
-    
+.conta{
+    font-size: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 30px;
 }
+
+.container{
+    font-size: 18px;
+}
+
+
