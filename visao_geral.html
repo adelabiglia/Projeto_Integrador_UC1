@@ -21,10 +21,10 @@
           <th>Ações</th>
         </tr>
         <tr>
-          <td>Janeiro</td>
-          <td>1500</td>
-          <td>800</td>
-          <td>500</td>
+          <td id="textoMes">...</td>
+          <td id="textoEntrada" >...</td>
+          <td id="textoSaida">...</td>
+          <td id="textoSaldo">...</td>
           <td><button>Ver Controle</button></td>
           
         </tr>
@@ -57,6 +57,41 @@
             <td><button>Ver Controle</button></td>
           </tr>
       </table>
+
+      <script>
+
+        let transacao={
+            id: 0,
+            ano: 2025,
+            mes: 10,
+            entrada: 250,
+            saida: 100,
+            saldo: 500
+        }
+
+        document.querySelector("#textoEntrada").innerHTML= transacao.entrada
+        document.querySelector("#textoSaida").innerHTML= transacao.saida
+        document.querySelector("#textoSaldo").innerHTML= transacao.saldo
+
+        let nomeMes 
+        if(transacao.mes == 1)nomeMes = "Janeiro"
+        if(transacao.mes == 2)nomeMes = "Ferveriro"
+        if(transacao.mes == 3)nomeMes = "Março"
+        if(transacao.mes == 4)nomeMes = "Abril"
+        if(transacao.mes == 5)nomeMes = "Maio"
+        if(transacao.mes == 6)nomeMes = "Junho"
+        if(transacao.mes == 7)nomeMes = "Julho"
+        if(transacao.mes == 8)nomeMes = "Agosto"
+        if(transacao.mes == 9)nomeMes = "Setembro"
+        if(transacao.mes == 10)nomeMes = "Outubro"
+        if(transacao.mes == 11)nomeMes = "Novembro"
+        if(transacao.mes == 12)nomeMes = "Dezembro"
+
+        document.querySelector("#textoMes").innerHTML= nomeMes
+
+
+
+      </script>
 
 </body>
 </html>
