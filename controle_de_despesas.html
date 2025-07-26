@@ -31,54 +31,89 @@
 
     <div>
         <label>
-            Descrição            
-            <input  type="text">
+            Data           
+            <input id="inputData" type="datetime">
         </label>
+        <br/><br/> 
+        <label for="descricao">Descrição</label>
+        <select id="descricao">
+            <option value="alimentacao">Alimentação</option>
+            <option value="casa">Casa</option>
+            <option value="diversas">Diversas</option>
+            <option value="lazer">Lazer</option>
+            <option value="transporte">Transporte</option>
+            <option value="vestuario">Vestuário</option>
+            <option value="salario">Salário</option>
+          </select>
+
+        <br/><br/> 
         <label>
             Valor          
-            <input  type="text">
+            <input id="inputValor" type="number" >
         </label>
+        <br/><br/> 
         <label>      
-            <input  type="checkbox">
+            <input id="inputEntrada" type="radio" name="opcao" value="opcao1">
             Entrada
-        </label>    
-        <label>      
-            <input  type="checkbox">
+            <input id="inputSaida" type="radio" name="opcao" value="opcao1">
             Saída
         </label>  
-        <button>Adicionar</button>
+        <button onclick="adicionar()" >Adicionar</button>
+        <br/><br/> 
     </div>
-
-    <div>
-        <p> <strong> Descrição_______________________________Valor_____________________________________Tipo </strong></p>
-        <p>  Salário__________________________________1500_______________________________________+ </p>
-        <p>  Alimentação______________________________380________________________________________- </p>
-        <p>  Uber____________________________________654________________________________________- </p>
-    </div>
+    
     <div>
         <table>
+            
             <tr>
+              <th>Data</th>
               <th>Descrição</th>
               <th>Valor</th>
               <th>Tipo</th>
             </tr>
             <tr>
+              <td>25/06/2025</td>
               <td>Salário</td>
               <td>1500</td>
               <td>+</td>
             </tr>
             <tr>
+              <td>28/06/2025</td>
               <td>Alimentação</td>
               <td>380</td>
               <td>-</td>
             </tr>
             <tr>
+              <td>25/07/2025</td>  
               <td>Uber</td>
               <td>654</td>
               <td>-</td>
             </tr>
           </table>
     </div>
+
+    <script>
+
+         let despesa = {
+            id: 0,
+            data: "",
+            descricao: "",
+            valor: 0,
+            entrada: true
+         }
+
+         function adicionar(){
+            despesa.data = document.querySelector("#inputData").value
+            despesa.descricao = document.querySelector("#descricao").value
+            despesa.valor = parseFloat (document.querySelector("#inputValor").value)
+
+            
+            despesa.id = 1
+
+            console.log(despesa)
+         }
+
+    </script>
 
 
 </body>
