@@ -11,7 +11,7 @@
         <div class="conta">
 
             <h1>Cadastre-se</h1>
-            <p>Você já tem um conta? <a href="#">Clique aqui</a></p>
+            <p>Você já tem um conta? <a href="./painel_logim.html">Clique aqui</a></p>
 
         </div>
 
@@ -22,50 +22,93 @@
             <h4>Informações pessoais</h4>
 
         
-            <form>
+            <form onsubmit="salvar(event)">
                 
                 <label for="nome">Nome Completo:</label><br>
-                <input type="text" id="nome" name="nome" required><br><br>
+                <input type="text" id="inputNome" name="nome" required><br><br>
 
-                <label for="data de nacimento" id="data" name="data" required>Data de nascimento</label><br>
-                <input type="date" id="data de nascimento" name="data de nascimento" required><br><br>
+                <label for="data de nacimento" id="dataNascimento" name="data" required>Data de nascimento</label><br>
+                <input type="date" id="inputNascimento" name="data de nascimento" required><br><br>
 
-                <label for="Endereço" id="endereço" name="endereço" required>Endereço</label><br>
-                <input type="text" id="rua" name="rua" placeholder="Rua" required>
+                <label for="Endereço" id=endereco" name="endereço" required>Endereço</label><br>
+                <input type="text" id="inputRua" name="rua" placeholder="Rua" required>
 
 
-                <input type="number" id="numero" name="numero" placeholder="Numero" required><br><br>
+                <input type="text" id="inputNumero" name="numero" placeholder="Numero" required><br><br>
                 
-                <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                <input type="text" id="inputBairro" name="bairro" placeholder="Bairro" required>
             
-                <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
-
-            </form>
-        </div>
-
-        <div class="logim">
+                <input type="text" id="inputCidade" name="cidade" placeholder="Cidade" required>
 
                 <h2>Dados de Logim</h2>
 
-            <form action="#">
                 <label for="email">E-mail:</label><br>
-                <input type="email" id="email" name="email" required><br><br>
+                <input type="email" id="inputEmail" name="email" required><br><br>
 
                 <label for="senha">Senha:</label><br>
-                <input type="password" id="senha" name="senha" minlength="8" required><br><br>
+                <input type="password" id="inputSenha" name="senha" minlength="8" required><br><br>
 
                 <label for="confirmar senha">Confirmar Senha:</label><br>
-                <input type="password" id="confirmar senha" name="confirmar senha" minlength="8" required><br><br>
+                <input type="password" id="inputCsenha" name="confirmar senha" minlength="8" required><br><br>
 
-                <input type="checkbox" name="promocoes" id="promocoes" value="sim">
                 <label for="promocoes">Desejo receber promoções e novidades por e-mail</label><br><br>
+                <input type="checkbox" name="promocoes" id="promocoes" value="sim">
 
-                <button type="submit">Salvar e continuar</button>
+                <button type="submit" >Salvar e continuar</button>
                 
             </form> 
 
         </div>
     </div>
+
+
+    <script>
+
+        let usuario = {
+            
+            id: "",
+            nome: "",
+            data_nascimento: "",
+            rua: "",
+            numero: "",
+            bairro: "",
+            cidade: "",
+            email: "",
+            senha: "",
+            premium: false
+
+        }
+
+        function salvar(e){
+            e.preventDefault()
+            
+            usuario.nome = document.querySelector("#inputNome").value
+            usuario.id = 1
+            usuario.data_nascimento = document.querySelector("#inputNascimento").value
+            usuario.rua = document.querySelector("#inputRua").value
+            usuario.numero = document.querySelector("#inputNumero").value
+            usuario.bairro = document.querySelector("#inputBairro").value
+            usuario.cidade = document.querySelector("#inputCidade").value
+            usuario.email = document.querySelector("#inputEmail").value
+            usuario.senha = document.querySelector("#inputSenha").value
+            usuario.criado_em = new Date()
+            
+            console.log(usuario)
+            
+        }
+        
+
+
+        
+
+
+
+
+
+
+
+
+    </script>
 
 
 

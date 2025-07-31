@@ -1,19 +1,54 @@
 
 
 body{
-    background-color: #fffff0;
-    padding: 150px;
+    background-image: url(./imagens/A\ dark-themed\ financial\ page\ background\ featuring\ green\ accents\,\ a\ glowing\ Bitcoin\ coin\ in\ the\ cente.jpeg);
+    padding: 80px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    min-height: 25vh;
+    color: aliceblue;
 }
 
 .conta{
+    margin-top: 2;
     font-size: 20px;
     display: flex;
+    
     align-items: baseline;
     gap: 30px;
 }
 
+.conta a{
+    font-size: 23px;
+    color: rgb(228, 72, 119);
+}
+
+.conta p {
+    font-size: 30px;
+}
+
 .container{
-    font-size: 18px;
+    font-size: 22px;
+    color: aliceblue;
+}
+
+.container h1{
+    color: aliceblue;
+}
+
+.container input {
+    padding: 8px 35px;
+
+}
+
+.container button{
+    padding: 8px 25px;
+    border-radius: 15px;
+    color: #333;
+    font-size: 15px;
+    background-color: #00ff0f;
 }
 
 
