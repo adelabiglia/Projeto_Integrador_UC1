@@ -5,9 +5,6 @@ body{
     padding: 80px;
     background-size:cover;
     background-repeat: no-repeat;
-    justify-content: center;
-    align-items: center;
-    min-height: 25vh;
     color: aliceblue;
 }
 
