@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    
+    <link rel="stylesheet" href="./painelAdministrativo.css">
+
+</head>
+<body>
+    
+    <h1>Painel Administrativo</h1>
+
+    <hr>
+
+    <button class="botaoInicial">Início</button> 
+    
+    <h2 class="usuario">Usuários cadastrados</h2>
+
+
+    <label for="quantity">Resultados por página:</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="100" placeholder="Digite a quantidade">
+    
+    <br>
+    <br>
+
+
+    <form>
+        <label for="filterType">Filtrar por tipo:</label>
+        <select id="filterType" name="filterType">
+          <option value="all">Todos</option>
+          <option value="Free">Free</option>
+          <option value="Premium">Premium</option>
+        </select>
+        <input type="submit" value="Filtrar">
+      </form>
+
+    <br>
+
+
+    <table class="tabela" border ="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Plano</th>
+            <th>Status</th>
+      
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="textoNome">...</td>
+            <td id="textoEmail">...</td>
+            <td id="textoPlano">...</td>
+            <td id="textoStatus">...</td>
+            
+          
+          </tr>
+          <tr>
+            <td>Maria Oliveira</td>
+            <td>maria@email.com</td>
+            <td>Premium</td>
+            <td>Ativo</td>
+           
+          </tr>
+          <tr>
+            <td>Carlos Souza</td>
+            <td>carlos@email.com</td>
+            <td>Free</td>
+            <td>Inativo</td>
+           
+          </tr>
+          <tr>
+            <td>Ana Costa</td>
+            <td>ana@email.com</td>
+            <td>Premium</td>
+            <td>Ativo</td>
+           
+          </tr>
+
+          <tr>
+          <td>Juliana Souza</td>
+          <td>jusouza@email.com</td>
+          <td>Free</td>
+          <td>Ativo</td>
+         
+
+          </tr>
+        </tbody>
+      </table>
+    
+
+      <script>
+
+        let usuario = {
+
+            nome: "João", 
+            email: "joao@email.com",
+            premium: false, 
+            ativo: true
+
+        }
+
+        document.querySelector("#textoNome").innerHTML = usuario.nome
+        document.querySelector("#textoEmail").innerHTML = usuario.email
+        document.querySelector("#textoPlano").innerHTML = usuario.premium ? "Premium" : "Free"
+        document.querySelector("#textoStatus").innerHTML = usuario.ativo ? "Ativo" : "Inativo"
+        
+          
+
+      
+
+      </script>
+
+    </body>
+    </html>
+
+    <br>
+    <br>
+
+    <hr>
+
+
+     
+   
+
+
+    
+
+    
+    
+    
+    
+</body>
+</html>
