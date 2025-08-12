@@ -3,28 +3,31 @@ import './App.css';
 
 function App() { //Aqui é JavaScript 
 
-    let cesta = ['Pão', 'Suco', 'Chocolate', 'Torrone', 'Torrada'] //Só utilizado para vetor 
+  //Faça uma lista com todos os numeros até 10 mas exiba apenas os numeros impares
 
-    let desenha = [];
-  
-  //declara o indice; compara se é pra continuar; incrementa o indice
+  let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    for(let i=0; i<3; i++){
-      //desenha [i] = 
-      desenha.push( <p> {cesta[i]} </p> ) //não depende do [i]
+  let mostrar = [];
 
-
+  for(let i=0; i < numeros.length ; i++){
+    if (numeros[i] % 2 !== 0){
+      mostrar.push( <p> {numeros[i]} </p> )
     }
+  }
 
-    return(
-      <main className="App">
     
-      {desenha}
 
-      </main>
+  return(
+    <main className="App">
+      {mostrar}
+    </main>
 
   ); 
 
+
+
 }
+
+
 
 export default App;
