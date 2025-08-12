@@ -2,8 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() { // aqui é javascript
-  
-  
+    
   /*let oi = "Olá Mundo!";
 
   oi += " André"; // soma suprimida = é a mesma coisa que oi = oi + " André"
@@ -18,7 +17,7 @@ function App() { // aqui é javascript
 
 
   function calculadora (a, b, op){
-  if (op == '+'){
+  /*if (op == '+'){
     return a + b
   }
   else if (op == '-'){
@@ -29,11 +28,19 @@ function App() { // aqui é javascript
   }
   else if (op == '*'){
     return a * b
+  }*/
+    switch(op){
+      case '+':
+        return a + b
+      case '-':
+        return a - b
+      case '*':
+        return a * b
+      case '/':
+        return a / b
+    }
   }
-  }
-  
-
-    
+   
   return ( /* aqui é html*/
     <main className="App">
       {calculadora (5, calculadora(8, 7, '*'), '+')}<br/>
