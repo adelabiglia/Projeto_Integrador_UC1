@@ -3,29 +3,22 @@ import './App.css';
 
 function App() { //Aqui é JavaScript 
 
-  function calculadora(a, b, op){
-    if (op == '+'){
-      return a + b
-    }
-    else if (op == '-'){
-      return a - b
-    }
-    if (op == '*'){
-      return a * b
-    }
-    else if (op == '/'){
-      return a / b
+  function calculadora(a, b, op){ //O switch não precisa do BREAK (br) ele pula um pedaço do código
+      switch(op){
+      case '+':
+        return a + b
+      case '-':
+        return a - b
+      case '*':
+        return a * b
+      case "/":
+        return a / b
 
-    }
-      
-
+      }
     
-  }
+    }
 
-  return ( /*Aqui é HTML */
-
-    // VAR é global - LET - CONST
-
+    return(
     <main className="App">
       
     {calculadora(200, 10, "/")}<br/>
@@ -35,8 +28,6 @@ function App() { //Aqui é JavaScript
     {calculadora(5,calculadora(8, 7, "*"), "+")}<br/>
     {calculadora(10,calculadora(5, 7, "-"), "+")}<br/>
     
-
-
 
 
     </main>
