@@ -15,9 +15,9 @@ function App() { // Aqui é JavaScript//
     return a/b;
   } */
 
-    function calculadora (a, b, op){
+    /* function calculadora (a, b, op){*/
 
-      switch(op){
+     /* switch(op){
         case '+':
           return a + b
         case '-':
@@ -26,9 +26,10 @@ function App() { // Aqui é JavaScript//
           return a / b
         case '*':
           return a * b
-      }
+      } */
       
       /* if(op == '+'){
+
         return a + b
     }
     else if(op == '-'){
@@ -40,18 +41,22 @@ function App() { // Aqui é JavaScript//
     else if(op == '*'){
       return a * b;
     } */ 
-  }
+
+    let cesta = ['pão', 'suco', 'fruta', 'feijão']
   
+    let desenha = [];
+    // Declara o índice; compara se é para continuar; incrementa o índice
+    for(let i=0; i<6; i++){
+      desenha.push(<p>  { cesta[i] } </p>)
 
-  return ( /* Aqui é HTML */
-    <main className="App">
+    }
+
+    return ( /* Aqui é HTML */
+      <main className="App">
       
-      {calculadora(5, calculadora(5, 7, '*') , '+')} <br/>
-      {calculadora(3, 1, '-')} <br/>
-      {calculadora(3, 1, '/')} <br/>
-      {calculadora(3, 1, '*')} 
+        {desenha} 
 
-    </main>
+      </main>
   );
 }
 
