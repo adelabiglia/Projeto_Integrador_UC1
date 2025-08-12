@@ -16,7 +16,19 @@ function App() { // Aqui é JavaScript//
   } */
 
     function calculadora (a, b, op){
-      if(op == '+'){
+
+      switch(op){
+        case '+':
+          return a + b
+        case '-':
+          return a - b
+        case '/':
+          return a / b
+        case '*':
+          return a * b
+      }
+      
+      /* if(op == '+'){
         return a + b
     }
     else if(op == '-'){
@@ -27,7 +39,7 @@ function App() { // Aqui é JavaScript//
     }
     else if(op == '*'){
       return a * b;
-    }
+    } */ 
   }
   
 
