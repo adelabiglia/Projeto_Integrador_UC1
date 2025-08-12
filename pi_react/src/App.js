@@ -4,16 +4,17 @@ import './App.css';
 function App() { // aqui é o componente principal do React, 
 // onde você pode definir a estrutura da sua aplicação.
   
-function calculadora(a,b,op) {
-  if (op == '+') {
-    return a + b;
-  }else if (op == '-') {
-    return a - b;
-  } else if (op == '*') {
-    return a * b;
-  } else if (op == '/') {
-    return a / b;
-  }
+function calculadora(a, b, op) {
+  switch (op) {
+    case '+':
+      return a + b
+    case '-':
+      return a - b
+    case '*':
+      return a * b
+    case '/':
+      return a / b
+
 }
   return ( 
     
