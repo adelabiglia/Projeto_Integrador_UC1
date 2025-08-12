@@ -3,7 +3,7 @@ import './App.css';
 
 function App() { // Aqui é JavaScript//   
 
-  let oi = "Olá, mundo! ";
+  /*let oi = "Olá, mundo! ";
 
   oi += "Hln";
 
@@ -13,13 +13,31 @@ function App() { // Aqui é JavaScript//
 
   function divide(a, b){
     return a/b;
-  } 
+  } */
+
+    function calculadora (a, b, op){
+      if(op == '+'){
+        return a + b
+    }
+    else if(op == '-'){
+      return a - b;
+    }
+    else if(op == '/'){
+      return a / b;
+    }
+    else if(op == '*'){
+      return a * b;
+    }
+  }
+  
 
   return ( /* Aqui é HTML */
     <main className="App">
       
-      {soma(oi, "HLN")} <br/>
-      {divide(36, 6)}
+      {calculadora(5, calculadora(5, 7, '*') , '+')} <br/>
+      {calculadora(3, 1, '-')} <br/>
+      {calculadora(3, 1, '/')} <br/>
+      {calculadora(3, 1, '*')} 
 
     </main>
   );
