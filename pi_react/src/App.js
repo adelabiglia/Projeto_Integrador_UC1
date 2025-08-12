@@ -2,21 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() { //Aqui é JavaScript 
-let oi = "Olá mundo! ";
 
-//oi += "Milena!"; //Soma suprimida (+=)
+  function calculadora(a, b, op){
+    if (op == '+'){
+      return a + b
+    }
+    else if (op == '-'){
+      return a - b
+    }
+    if (op == '*'){
+      return a * b
+    }
+    else if (op == '/'){
+      return a / b
 
+    }
+      
 
-function soma(a, b){ //Paramêtros, eles não tem um tipo, irão receber o que colocam. 
-  return a + b
-
-function divide(a, b){
-
-  return a/b; 
-
-}
-
-}
+    
+  }
 
   return ( /*Aqui é HTML */
 
@@ -24,8 +28,17 @@ function divide(a, b){
 
     <main className="App">
       
-    {soma(oi, "Milena!")}<br/>
-    {divide(36, 6)}
+    {calculadora(200, 10, "/")}<br/>
+    {calculadora(1200, 5, "/")}<br/>
+    {calculadora(252, 3, "-")}<br/>
+    {calculadora(325, 7, "+")}<br/>
+    {calculadora(5,calculadora(8, 7, "*"), "+")}<br/>
+    {calculadora(10,calculadora(5, 7, "-"), "+")}<br/>
+    
+
+
+
+
     </main>
 
   ); 
