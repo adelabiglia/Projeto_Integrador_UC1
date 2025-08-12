@@ -3,7 +3,8 @@ import './App.css';
 
 function App() { // aqui é javascript
   
-  let oi = "Olá Mundo!";
+  
+  /*let oi = "Olá Mundo!";
 
   oi += " André"; // soma suprimida = é a mesma coisa que oi = oi + " André"
 
@@ -13,12 +14,32 @@ function App() { // aqui é javascript
 
   function divide (a, b){
     return a /b;
-  }
+  }*/
 
+
+  function calculadora (a, b, op){
+  if (op == '+'){
+    return a + b
+  }
+  else if (op == '-'){
+    return a - b
+  }
+  else if (op == '/'){
+    return a / b
+  }
+  else if (op == '*'){
+    return a * b
+  }
+  }
+  
+
+    
   return ( /* aqui é html*/
     <main className="App">
-      {soma(oi, " André") }<br/>
-      {divide(36, 6)}
+      {calculadora (5, calculadora(8, 7, '*'), '+')}<br/>
+      {calculadora (5, 5, '-')}<br/>
+      {calculadora (5, 5, '/')}<br/>
+      {calculadora (5, 5, '*')}<br/>
     </main>
   );
 }
