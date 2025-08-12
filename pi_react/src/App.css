@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-size: 55px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 .App-logo {
@@ -12,6 +14,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;
