@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-size: 25px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 .App-logo {
@@ -7,11 +9,23 @@
   pointer-events: none;
 }
 
+.buttonSucess {
+  background-color: gray;
+  height: 30px;
+  padding: 7px;
+  margin: 20px;
+  color: black;
+  cursor: pointer;
+  border: black;
+  border-radius: 5px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;
@@ -36,14 +50,21 @@
     transform: rotate(360deg);
   }
 }
-
-.buttonLogin {
-  background-color: #61dafb;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px ;
+.button-login{
+  background-color: yellowgreen;
   height: 30px;
-  cursor: pointer;
+  padding: 7px;
   margin: 20px;
+  color: #FFF;
+  cursor: pointer;
+  border-radius: 5px;
+  
+}
+
+.login{
+  color: black;
+  font-family: ' Geneva ';
+  
+  
+
 }
