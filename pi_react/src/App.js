@@ -14,7 +14,9 @@ function App() {
   return ( 
                     
     <main className="App">
+
        <p> impar: {impar.join(", ")} </p>
+       
     </main>
 
   );
