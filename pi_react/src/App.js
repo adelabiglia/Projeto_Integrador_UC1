@@ -87,9 +87,9 @@ function App() { //Aqui é JavaScript
                 isLogin && (
                     <form className="login">
                         <label>Login: </label>
-                        <input type="email" name="Email" placeholder="Digite seu email" value={email} onChange={(e) => mudarEmail(e.target.value)} /><br />
+                        <input type="email" name="Email" placeholder="Digite seu email" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
                         <label>Senha: </label>
-                        <input type="password" name="Senha" placeholder="Digite sua senha" value={senha} onChange={(e) => mudarSenha(e.target.value)} /><br />
+                        <input type="password" name="Senha" placeholder="Digite sua senha" value={senha} onChange={(e) => setSenha(e.target.value)} /><br />
                         <button className="buttonLogin" onClick={() => enviar()} >Entrar</button>
 
                     </form>
