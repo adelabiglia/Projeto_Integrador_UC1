@@ -5,7 +5,7 @@ function App() { //Aqui é JavaScript
 
   //Faça uma lista com todos os numeros até 10 mas exiba apenas os numeros impares
 
-  let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   let mostrar = [];
 
@@ -14,20 +14,12 @@ function App() { //Aqui é JavaScript
       mostrar.push( <p> {numeros[i]} </p> )
     }
   }
-
-    
-
+  
   return(
     <main className="App">
       {mostrar}
     </main>
-
   ); 
-
-
-
 }
-
-
 
 export default App;
