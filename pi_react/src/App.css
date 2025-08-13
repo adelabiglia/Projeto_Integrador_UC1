@@ -1,12 +1,23 @@
 .App {
   text-align: center;
-  font-size: 55px;
+  font-size: 25px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.buttonSucess {
+  background-color: gray;
+  height: 30px;
+  padding: 7px;
+  margin: 20px;
+  color: black;
+  cursor: pointer;
+  border: black;
+  border-radius: 5px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
