@@ -3,23 +3,72 @@ import './App.css';
 
 function App() { //Aqui é JavaScript 
 
-  //Faça uma lista com todos os numeros até 10 mas exiba apenas os numeros impares
+  let email = ""
 
-  let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  function mudaEmail(valor){
+    email = valor
 
-  let mostrar = [];
-
-  for(let i=0; i < numeros.length ; i++){
-    if (numeros[i] % 2 !== 0){
-      mostrar.push( <p> {numeros[i]} </p> )
-    }
   }
 
-    
+  let senha = ""
 
-  return(
+  function mudaSenha(valor){
+    senha = valor
+  }
+
+  function enviar(){
+    alert("E-mail:" + " " +email + " " + "\nSenha:" + " " +senha)
+  }
+
+  let isLogin = true;
+
+  function mudaTela(){
+    isLogin = !isLogin
+  }
+
+
+  return( /* Aqui é HTML */
     <main className="App">
-      {mostrar}
+
+      <button onClick={() => {isLogin = !isLogin}} >
+
+        {isLogin && ("Cadastrar-se")}
+        {!isLogin && ("Voltar para o login")}
+
+      </button>
+
+      <br/>
+      <br/>
+
+      {!isLogin && (
+        <form className="register" > </form>
+      )}
+
+
+      {isLogin && (
+
+        <form className="login">
+          <label className="login">
+
+            Digite seu email: 
+            <input type="email" name="Email" placeholder="email@exemplo.com" onChange={(e) => mudaEmail (e.target.value) } />
+
+          </label>
+
+          <br/>
+          
+          <label className="login" >
+
+            Digite sua senha:
+            <input type="password" name="Senha" placeholder="Digite seu senha" onChange={(e) => mudaSenha (e.target.value)} />
+            <br/>
+
+            <button onClick={() => enviar ()} className="button-login" > Login </button>
+
+          </label>
+        </form>    
+      )}
+
     </main>
 
   ); 

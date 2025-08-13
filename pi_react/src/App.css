@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-size: 55px;
+  font-size: 25px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
@@ -38,4 +38,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+.button-login{
+  background-color: yellowgreen;
+  height: 30px;
+  padding: 7px;
+  margin: 20px;
+  color: #FFF;
+  cursor: pointer;
+  border-radius: 5px;
+  
+}
+
+.login{
+  color: black;
+  font-family: ' Geneva ';
+  
+  
+
 }
