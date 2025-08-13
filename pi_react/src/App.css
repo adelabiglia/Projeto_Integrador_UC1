@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.buttonLogin {
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px ;
+  height: 30px;
+  cursor: pointer;
+  margin: 20px;
+}
