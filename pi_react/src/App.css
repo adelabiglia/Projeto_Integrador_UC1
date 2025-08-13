@@ -50,3 +50,21 @@
     transform: rotate(360deg);
   }
 }
+.button-login{
+  background-color: yellowgreen;
+  height: 30px;
+  padding: 7px;
+  margin: 20px;
+  color: #FFF;
+  cursor: pointer;
+  border-radius: 5px;
+  
+}
+
+.login{
+  color: black;
+  font-family: ' Geneva ';
+  
+  
+
+}
