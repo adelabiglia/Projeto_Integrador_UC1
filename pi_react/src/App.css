@@ -1,71 +1,44 @@
 .App {
   text-align: center;
   font-size: 25px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+  }
+    
+  .login{
+    color: black;
+    font-family: ' Geneva ';
+    text-align: center;
+    
   }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .buttonSucess {
-  background-color: gray;
+  background-color: aliceblue;
   height: 30px;
   padding: 7px;
-  margin: 20px;
+  margin: 10px 0;
   color: black;
   cursor: pointer;
   border: black;
   border-radius: 5px;
-  
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.button-login{
-  background-color: yellowgreen;
-  height: 30px;
-  padding: 7px;
-  margin: 20px;
-  color: #FFF;
-  cursor: pointer;
-  border-radius: 5px;
-  
-}
-
-.login{
-  color: black;
-  font-family: ' Geneva ';
+  font-size: large;
+  max-width: 100%;
   text-align: center;
-  
-
 }
+
+body{
+  background: linear-gradient(77deg,rgba(16, 138, 179, 1) 0%, rgba(93, 245, 214, 1) 4%, rgba(0, 212, 255, 1) 51%);
+  padding: 106px 190px;
+  font-family: ' Geneva ';
+  display: block;
+  flex-direction: initial;
+  margin: auto;
+}
+
+input{
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px;
+  max-width: 100%;
+  }
