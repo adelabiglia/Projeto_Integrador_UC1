@@ -3,16 +3,19 @@ import './App.css';
 import {useState} from 'react'
 
 function App() { //Aqui é JavaScript 
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    phone: "",
+    name: "",
+  });
   
-  
-  const [email, setEmail] = useState("");
- 
-  const [senha, setSenha] = useState("");
-  
+  //const [email, setEmail] = useState("");
+  //const [senha, setSenha] = useState("");
   const [isLogin, setIslogin] = useState(true);
 
   function enviar(){
-    alert("Email:  " +email+ "\nSenha:  " +senha)
+    alert("Email:  " +user.email+ "\nSenha:  " +user.password)
   }
 
   
@@ -51,10 +54,10 @@ function App() { //Aqui é JavaScript
       {isLogin && (
       <form className="login">
         <label>
-          Digite Seu Email: <input type="email" name="Email" placeholder="Digite Seu Email" onChange={(e) => setEmail(e.target.value) } /><br/>
+          Digite Seu Email: <input type="email" name="Email" placeholder="Digite Seu Email" onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
         </label>
         <label>
-          Digite sua Senha: <input type="password"  name="Senha" placeholder="Digite sua Senha" onChange={(e) => setSenha(e.target.value) } /><br/>
+          Digite sua Senha: <input type="password"  name="Senha" placeholder="Digite sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
         <button className="buttonSucess" type="submit" onClick={() => enviar () }> <strong>Salvar</strong> </button>
       </form>
