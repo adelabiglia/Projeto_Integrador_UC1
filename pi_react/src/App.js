@@ -2,6 +2,12 @@ import logo from './logo.svg';
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
 
+
+const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
+const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 function App() { //Aqui é JavaScript 
   const [isLogin, setIslogin] = useState(true);
   
@@ -58,6 +64,12 @@ function App() { //Aqui é JavaScript
         </label>
         <label>
           Cidade: <input type="text" name="Cidade" placeholder="Digite Sua Cidade" onChange={(e) => setUser({...user, city: e.target.value}) } /><br/>
+        </label>
+        <label>
+          Email: <input type="text" name="Email" placeholder="Digite seu Email" onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
+        </label>
+        <label>
+          Senha: <input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
 
 
