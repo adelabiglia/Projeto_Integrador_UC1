@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
+import { createClient } from "@supabase/supabase-js";
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -10,6 +11,33 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 function App() { //Aqui é JavaScript 
   const [isLogin, setIslogin] = useState(true);
+
+  const [isSendRegister, SetIsSendRegister] = useState(false);
+
+  const [msg, setMsg] = useState("");
+
+  async function register(){
+    SetIsSendRegister(true);
+
+    try{    
+      let { data, error } = await supabase.auth.signUp({
+        email: user.email,
+        password: user.password
+      })
+
+      if(error) throw error
+
+      if(data.status == 400) throw data.message
+      
+      setMsg("Cadastro realizado!")
+    }catch(e){
+      setMsg(`Error: ${e.message}`);
+    }
+
+    SetIsSendRegister(false);
+
+    setTimeout(() => setMsg("") , 4000)
+  }
   
   /*const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -71,12 +99,13 @@ function App() { //Aqui é JavaScript
         <label>
           Senha: <input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
+        <button className="buttonSucess" onClick={register} disabled={isSendRegister}> {isSendRegister ? "Cadastrando..." : "Cadastrar"} </button>
 
 
 
-                    </form>
-                )
-            }
+      </form>
+    )
+  }
 
       {isLogin && (
       <form className="login">
@@ -86,9 +115,12 @@ function App() { //Aqui é JavaScript
         <label>
           Digite Sua Senha: <input type="password"  name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
-        <button className="buttonSucess" type="submit" onClick={() => enviar () }> Salvar </button>
+        <button className="buttonSucess" type="submit" onClick={register}> Salvar </button>
       </form>
       )}     
+
+
+     {msg && (<div className='toast' > {msg} </div>)} 
     </main>
   ); 
 }
