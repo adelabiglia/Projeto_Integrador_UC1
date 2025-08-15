@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
+import { createClient } from "@supabase/supabase-js";
+
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -32,8 +34,36 @@ function App() { //Aqui é JavaScript
     password:"",
   })
 
-  function enviar(){
-    alert("Email:  " +user.email+ "\nSenha:  " +user.password)
+  const [isSendRegister, SetIsSendRegister] = useState(false);
+
+  const [msg, setMsg] = useState("");
+
+  async function register(){ //a função fica esperando, não é sincrona! 
+
+    SetIsSendRegister(true);
+    
+    try{
+
+        let { data, error } = await supabase.auth.signUp({
+          
+          email: user.email,
+          password: user.password
+
+        })
+
+        if(error) throw error
+
+        if(data.status == 400) throw data.message
+
+        setMsg("Cadastro realizado!");
+      }catch(e){
+        setMsg(`Error: ${e.message}`)
+      }
+
+    SetIsSendRegister(false);
+
+    setTimeout(() => setMsg(""), 5000);
+
   }
   
   return(/* aqui é html */
@@ -72,7 +102,15 @@ function App() { //Aqui é JavaScript
           Senha: <input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
 
+        <button
+          type="button" 
+          className="buttonSucess" 
+          onClick= {register} 
+          disabled={isSendRegister}> Salvar 
+          
+        </button>
 
+          {isSendRegister ? "Cadastrando...": "Cadastrar"}
 
                     </form>
                 )
@@ -86,9 +124,14 @@ function App() { //Aqui é JavaScript
         <label>
           Digite Sua Senha: <input type="password"  name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
-        <button className="buttonSucess" type="submit" onClick={() => enviar () }> Salvar </button>
+        <button type="button" className="buttonSucess" onClick= {register} > Salvar </button>
       </form>
-      )}     
+      )} 
+
+    
+    
+      {msg && (<div className='toast' >{msg}</div>)}
+
     </main>
   ); 
 }
