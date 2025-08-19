@@ -9,7 +9,7 @@ const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-function User() { //Aqui é JavaScript 
+function Panel() { //Aqui é JavaScript 
   const [isLogin, setIslogin] = useState(true);
 
   const [isSendRegister, SetIsSendRegister] = useState(false);
@@ -118,4 +118,4 @@ function User() { //Aqui é JavaScript
   ); 
 }
 
-export default User;
+export default Panel;
