@@ -56,7 +56,7 @@ input{
     opacity: 0;
     transform: translate(-20px);
     animation: toastFadeInOut 3s forwards;
-    z-index: 999;
+    z-index: 9999;
 
 
 }
@@ -76,4 +76,40 @@ input{
     opacity: 0;
     transform: translate(-20px);
   }
+}
+
+
+
+nav {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #282c34;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 1000;
+
+}
+
+nav a {
+
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+
+nav a:hover {
+
+  background-color: #fff;
+  color: #0000ff;
+
 }
