@@ -20,7 +20,7 @@ function App() { //Aqui é JavaScript
               <Link to="/home">Inicio</Link>
               <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
-              <Link to="administrativePanel">Painel Administrativo</Link>
+              <Link to="/administrativePanel">Painel Administrativo</Link>
             </>
           ) : (
             <>
@@ -41,6 +41,8 @@ function App() { //Aqui é JavaScript
             <Route path='/administrativePanel' element={<AdministrativePanel/>} />  
 
           </Route>
+          <Route path='/' element={<Navigate to='/login' replace/>}/>
+          
         </Routes>
       </main>
     </Router>
