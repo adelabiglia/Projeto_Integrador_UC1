@@ -2,6 +2,10 @@
 import './App.css';
 import User from './User';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
+import Home from './Home';
+import Panel from './Panel';
+import Categories from './Categories';
+
 
 function PrivateSessioon(){
   const hasSession = !! localStorage.getItem('supaSession')
@@ -20,7 +24,7 @@ function App() { //Aqui é JavaScript
               <Link to="/home">Inicio</Link>
               <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
-              <Link to="/administrativePanel">Painel Administrativo</Link>
+              <Link to="/Panel">Panel</Link>
             </>
           ) : (
             <>
@@ -38,11 +42,11 @@ function App() { //Aqui é JavaScript
           {/* Route = Rotas Logado*/}
             <Route path='/login' element={<Login/>} />  
             <Route path='/categories' element={<Categories/>} />  
-            <Route path='/administrativePanel' element={<AdministrativePanel/>} />  
+            <Route path='/Panel' element={<Panel/>} />  
 
           </Route>
           <Route path='/' element={<Navigate to='/login' replace/>}/>
-          
+
         </Routes>
       </main>
     </Router>
