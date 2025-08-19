@@ -63,6 +63,7 @@ function Auth() { //Aqui é JavaScript
   
   return(/* aqui é html */
     <main className="App">
+      <div className="card">
       <button className='buttonSucess' onClick={() => setIslogin(!isLogin)} >
         {isLogin && ("Cadastrar-se")}
         {!isLogin && ("Voltar para o Login")}
@@ -112,6 +113,8 @@ function Auth() { //Aqui é JavaScript
         <button className="buttonSucess" type="submit" onClick={register}> Salvar </button>
       </form>
       )}
+      
+      </div>
 
       {msg && (<div className='toast'>{msg} </div>)}     
     </main>

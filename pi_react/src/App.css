@@ -1,8 +1,26 @@
 .App {
   min-height: calc (100vh - 60px);
   margin-top: 37px; 
-  text-align: center;
-  font-size: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, sans-serif;
+  
+
+  }
+
+  .card {
+
+    background: #fff;
+    padding: 50px 110px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 350px;
+    min-height: 525px;
+    text-align: center;;
 
   }
     
@@ -14,21 +32,22 @@
   }
 
 .buttonSucess {
-  background-color: aliceblue;
   height: 30px;
   padding: 7px;
   margin: 10px 0;
-  color: black;
+  background-color: #677cac;
+  color: rgb(255, 255, 255);
   cursor: pointer;
   border: black;
   border-radius: 5px;
   font-size: large;
   max-width: 100%;
   text-align: center;
+
 }
 
 body{
-  background: linear-gradient(77deg,rgba(16, 138, 179, 1) 0%, rgba(93, 245, 214, 1) 4%, rgba(0, 212, 255, 1) 51%);
+  background:#869dcc;
   padding: 106px 190px;
   font-family: ' Geneva ';
   display: block;
