@@ -99,7 +99,7 @@ function Auth() { //Aqui é JavaScript
         <label>
           Senha: <br/><input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
-        <button className="buttonSucess" onClick={register} disabled={isLogin} > {isLogin ? "Cadastrando..." : "Cadastrar"} </button>
+        <button className="buttonSucess" onClick={register} disabled={loading} > {loading ? "Cadastrando..." : "Cadastrar"} </button>
       </form>
       )
       }
