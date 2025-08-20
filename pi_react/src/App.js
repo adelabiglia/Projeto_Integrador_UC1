@@ -25,8 +25,8 @@ function App() { //Aqui é JavaScript
               <Link to="/home">Inicio</Link>
               <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
-              <Link to="/Panel">Panel</Link>
-              <Link to="/Exit">Exit</Link>
+              <Link to="/Panel">Painel</Link>
+              <Link to="/Exit">Sair</Link>
             </>
           ) : (
             <>
