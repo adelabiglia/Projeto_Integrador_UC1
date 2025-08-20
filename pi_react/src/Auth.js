@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from 'react-router-dom';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -10,14 +11,54 @@ const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Auth() { //Aqui é JavaScript 
+
+  const nav = useNavigate();
+
   const [isLogin, setIslogin] = useState(true);
 
   const [loading, setLoading] = useState(false);
 
   const [msg, setMsg] = useState("");
 
+  async function logar() {
+    setLoading(true)
+
+    try{
+
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: user.email,
+      password: user.password
+    })
+
+    if(error) throw error;
+
+    setMsg('Logou');
+
+    setTimeout(
+
+      nav('/home', {replace: true}),
+      5002
+
+    );
+
+    
+
+    }catch(err){
+
+      setMsg('Error:' +err);
+
+    }
+
+
+    setLoading(false)
+
+    setTimeout(() => setMsg("") , 5000);
+    
+  }
+
   async function register (){
     setLoading(true);
+
     try{
       let { data, error } = await supabase.auth.signUp({
         email: user.email,
@@ -112,7 +153,7 @@ function Auth() { //Aqui é JavaScript
         <label>
           Digite Sua Senha: <input type="password"  name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
-        <button className="buttonSucess" type="submit" onClick={register}> Salvar </button>
+        <button className="buttonSucess" type="submit" onClick={logar} disabled={loading} > {loading ? "Entrando..." : "Login" } </button>
       </form>
       )}
       
