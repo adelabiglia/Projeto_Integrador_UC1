@@ -12,18 +12,20 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 function Auth() { //Aqui é JavaScript 
   const [isLogin, setIslogin] = useState(true);
 
-  const [isSendRegister, SetIsSendRegister] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [msg, setMsg] = useState("");
 
   async function register (){
-    SetIsSendRegister(true);
+    setLoading(true);
     try{
       let { data, error } = await supabase.auth.signUp({
         email: user.email,
         password: user.password
       })
+
       if(error) throw error
+      
       if(data.status == 400) throw data.message
 
       setMsg("Cadastro Realizado!")
@@ -31,7 +33,7 @@ function Auth() { //Aqui é JavaScript
       setMsg(`Error: ${e.message}`)
 
     }
-    SetIsSendRegister(false)
+    setLoading(false)
 
     setTimeout(() => setMsg("") , 5000);
   }
@@ -97,7 +99,7 @@ function Auth() { //Aqui é JavaScript
         <label>
           Senha: <br/><input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
         </label>
-        <button className="buttonSucess" onClick={register} disabled={isSendRegister} > {isSendRegister ? "Cadastrando..." : "Cadastrar"} </button>
+        <button className="buttonSucess" onClick={register} disabled={isLogin} > {isLogin ? "Cadastrando..." : "Cadastrar"} </button>
       </form>
       )
       }
