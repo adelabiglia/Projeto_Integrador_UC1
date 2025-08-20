@@ -9,7 +9,7 @@ import Exit from './Exit';
 
 
 function PrivateSessioon(){
-  const hasSession = !! localStorage.getItem('supaSession')
+  const hasSession = !! localStorage.getItem('supaSession');
   return hasSession ? <Outlet/> : <Navigate to="/login" replace />
 }
 
@@ -39,13 +39,14 @@ function App() { //Aqui é JavaScript
         <Routes>
         {/* Routes = Rotas Publicas*/}
           <Route path='/login' element={<Auth/>} />
-          <Route path='/home' element={<Home/>} />  
+           
           
           <Route element={<PrivateSessioon/>}> 
           {/* Route = Rotas Logado*/}
            
             <Route path='/categories' element={<Categories/>} />  
-            <Route path='/Panel' element={<Panel/>} />  
+            <Route path='/Panel' element={<Panel/>} /> 
+            <Route path='/home' element={<Home/>} />  
             <Route path='/Exit' element={<Exit/>} />  
 
           </Route>

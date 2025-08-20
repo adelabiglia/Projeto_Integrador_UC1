@@ -33,6 +33,7 @@ function Auth() { //Aqui é JavaScript
     if(error) throw error;
 
     setMsg('Logou');
+    localStorage.setItem('supaSession', data.session)
 
     setTimeout(
 
