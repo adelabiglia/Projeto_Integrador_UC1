@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
 import { createClient } from "@supabase/supabase-js";
+import { replace, useNavigate } from 'react-router-dom';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -10,111 +11,49 @@ const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Home() { //Aqui é JavaScript 
-  const [isLogin, setIslogin] = useState(true);
+  const nav = useNavigate();
+  const [entry, setEntry] = useState({
+    date: "",
+    description: "",
+    value: "",
+    user_id: "",
+    category_id: ""
 
-  const [isSendRegister, SetIsSendRegister] = useState(false);
-
-  const [msg, setMsg] = useState("");
-
-  async function register (){
-    SetIsSendRegister(true);
-    try{
-      let { data, error } = await supabase.auth.signUp({
-        email: user.email,
-        password: user.password
-      })
-      if(error) throw error
-      if(data.status == 400) throw data.message
-
-      setMsg("Cadastro Realizado!")
-    }catch(e){
-      setMsg(`Error: ${e.message}`)
-
-    }
-    SetIsSendRegister(false)
-
-    setTimeout(() => setMsg("") , 5000);
-  }
-  
-  /*const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    phone: "",
-    name: "",
-  });*/
-  
-  const [user, setUser] = useState({
-    name: "",
-    birth:"",
-    address:"",
-    number:"",
-    neighborhood: "",
-    city:"",
-    email:"",
-    password:"",
   })
 
-  function enviar(){
-    alert("Email:  " +user.email+ "\nSenha:  " +user.password)
+  async function createEntry(){
+    const{data: dU, error: eU} = await supabase.auth.getUser();
+
+    if(eU) nav('/login', {replace: true})
+
+    if(!dU) nav('/login', {replace: true})
+
+    if(dU && !dU.id) nav('/login', {replace: true})
+
+    entry = {... entry, user_id: dU.id}
+
+    const { data, error } = await supabase
+    .from('entries')
+    .insert([
+      entry
+    ])
+    .select()
+        
   }
   
   return(/* aqui é html */
-    <main className="App">
-      <button className='buttonSucess' onClick={() => setIslogin(!isLogin)} >
-        {isLogin && ("Cadastrar-se")}
-        {!isLogin && ("Voltar para o Login")}
-      </button>
 
-      <br/><br/>
-  
-      {!isLogin && (
-      <form className="register" >
-        <label>
-          Nome: <br/><input type="text" name="Nome" placeholder="Digite Seu Nome" onChange={(e) => setUser({...user, name: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Data de Nascimento: <br/><input type="text" name="Data de Nascimento" placeholder="Digite Sua Data de Nascimento" onChange={(e) => setUser({...user, birth: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Endereço: <br/><input type="text" name="Endereço" placeholder="Digite Seu Endereço" onChange={(e) => setUser({...user, address: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Numero: <br/><input type="text" name="Numero" placeholder="Digite o Número da Sua Residência " onChange={(e) => setUser({...user, number: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Bairro: <br/><input type="text" name="Bairro" placeholder="Digite Seu Bairro" onChange={(e) => setUser({...user, neighborhood: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Cidade: <br/><input type="text" name="Cidade" placeholder="Digite Sua Cidade" onChange={(e) => setUser({...user, city: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Email: <br/><input type="text" name="Email" placeholder="Digite seu Email" onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Senha: <br/><input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
-        </label>
-        <button className="buttonSucess" onClick={register} disabled={isSendRegister} > {isSendRegister ? "Cadastrando..." : "Cadastrar"} </button>
+    <div className="screen">
+      <form>
+      <input type="date" placeholder="Data" onChange={(e) => setEntry ({...entry, date: (e.target.value)})} />
+      <input type="text" placeholder="Descrição" onChange={(e) => setEntry ({...entry, description: (e.target.value)})} />
+      <input type="number" placeholder="Valor" onChange={(e) => setEntry ({...entry, value: (e.target.value)})} />
+      <input type="text" placeholder="Essa é uma chave de Categoria" onChange={(e) => setEntry ({...entry, category_id: (e.target.value)})} />
+
+
+      <button onClick={createEntry} > Salvar </button>
       </form>
-      )
-      }
-
-      {isLogin && (
-      <form className="login">
-        <label>
-          Digite Seu Email: <input type="email" name="Email" placeholder="Digite Seu Email" onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Digite Sua Senha: <input type="password"  name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
-        </label>
-        <button className="buttonSucess" type="submit" onClick={register}> Salvar </button>
-      </form>
-      )}
-
-      {msg && (<div className='toast'>{msg} </div>)}     
-    </main>
+    </div>
   ); 
 }
 
