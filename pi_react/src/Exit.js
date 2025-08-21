@@ -17,7 +17,7 @@ function Exit() { //Aqui é JavaScript
     user_id: "",
   })  
 
-  async function createEntry(){
+  async function createExit(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
   
       if(eU) nav('/login', {replace: true})
@@ -29,7 +29,7 @@ function Exit() { //Aqui é JavaScript
       entry = {... entry, user_id: dU.id}
   
       const { data, error } = await supabase
-      .from('entries')
+      .from('exits')
       .insert([
         entry
       ])
@@ -45,7 +45,7 @@ function Exit() { //Aqui é JavaScript
         <input type='number' placeholder='Valor' onChange={(e) => setExit ({...exit, value: e.target.value})}/>
         <input type='text' placeholder='essa é chave da categoria' onChange={(e) => setExit ({...exit, category_id: e.target.value})}/>
 
-        <button onClick={createEntry} > Salvar </button>
+        <button onClick={createExit} > Salvar </button>
       </form>
     </div>
 
