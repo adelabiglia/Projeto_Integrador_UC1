@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
 import { createClient } from "@supabase/supabase-js";
+import { replace, useNavigate } from 'react-router-dom';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -27,18 +28,18 @@ function Exit() { //Aqui é JavaScript
   
       if(dU && !dU.id) nav('/login', {replace: true})
   
-      entry = {... entry, user_id: dU.id}
+      exit = {... exit, user_id: dU.id}
   
       const { data, error } = await supabase
       .from('exits')
       .insert([
-        entry
+        exit
       ])
       .select()
           
     }
   
-  retunr (
+  return (
     <div className="screen">
       <form>
         <input type='date' placeholder='Data' onChange={(e) => setExit ({...exit, date: e.target.value})} />
