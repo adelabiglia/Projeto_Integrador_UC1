@@ -21,27 +21,21 @@ function Exit() { //Aqui é JavaScript
 
   async function createExit(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
+
+      const uid = dU?.user?.uid
   
-      if(eU) nav('/login', {replace: true})
-  
-      if(!dU) nav('/login', {replace: true})
-  
-      if(dU && !dU.id) nav('/login', {replace: true})
-  
-      exit = {... exit, user_id: dU.id}
+      if(!uid) nav('/login', {replace: true})
   
       const { data, error } = await supabase
       .from('exits')
-      .insert([
-        exit
-      ])
-      .select()
+      .insert({... exit, user_id: uid})
+      //.select()
           
     }
   
   return (
     <div className="screen">
-      <form>
+      <form onSubmit={(e)=> e.preventDefault()}>
         <input type='date' placeholder='Data' onChange={(e) => setExit ({...exit, date: e.target.value})} />
         <input type='text' placeholder='Descrição' onChange={(e) => setExit ({...exit, description: e.target.value})}/>
         <input type='number' placeholder='Valor' onChange={(e) => setExit ({...exit, value: e.target.value})}/>
