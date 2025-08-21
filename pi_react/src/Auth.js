@@ -32,14 +32,13 @@ function Auth() { //Aqui é JavaScript
     if(error) throw error;
 
     setMsg('Logou');
-
-    user = {...user, user_id: user}
+ 
 
         
     const { data: dU, error: eU } = await supabase
     .from('users')
-    .insert([user])
-    .select()
+    .insert({...user, user_id: data.user.uid})
+    //.select()
         
 
     localStorage.setItem('supaSession', data.session)
@@ -83,11 +82,8 @@ function Auth() { //Aqui é JavaScript
       
     const { data: userData, error: userErro } = await supabase
     .from('users')
-    .insert([
-    user,
-    ])
-
-.select()
+    .insert(user)
+    //.select()
         
 
       setMsg("Cadastro Realizado!")
@@ -136,7 +132,7 @@ function Auth() { //Aqui é JavaScript
       <br/><br/>
   
       {!isLogin && (
-      <form className="register" >
+      <form className="register" onSubmit={(e) => e.preventDefault()}>
         <label>
           Nome: <br/><input type="text" name="Nome" placeholder="Digite Seu Nome" onChange={(e) => setUser({...user, name: e.target.value}) } /><br/>
         </label>

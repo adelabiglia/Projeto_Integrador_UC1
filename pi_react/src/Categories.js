@@ -25,19 +25,22 @@ export default function Categories(){
   async function createCategorie(){
     const {data: dataUser, error: errorUser} = await supabase.auth.getUser();
 
-    if(errorUser) nav('login', {replace: true})
+    /*if(errorUser) nav('login', {replace: true})
     if(!dataUser) nav ('login', {replace: true})
-    if(dataUser && !dataUser.id) nav ('login', {replace: true})
+    if(dataUser && !dataUser.id) nav ('login', {replace: true})*/
+
+    const uid = dataUser?.user?.uid
+
+    if(!uid) nav('/login', {replace:true})
 
 
-    categorie = {...categorie, user_id: dataUser}
+    /*categorie = {...categorie, user_id: dataUser}*/
 
     
     const { data, error } = await supabase
-
     .from('categories')
-    .insert([categorie])
-    .select()
+    .insert({...categorie, user_id: uid});
+    //.select();
 
   }
 
@@ -46,7 +49,7 @@ export default function Categories(){
 
     <div className="screen"> 
     
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
 
       <input type="text" placeholder='Digite seu nome' onChange={(e) => setCategorie({...categorie, name: e.target.value})}/>     
       <input type="text" placeholder='Digite sua meta' onChange={(e) => setCategorie({...categorie, meta: e.target.value})}/>    
