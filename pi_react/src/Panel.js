@@ -14,12 +14,11 @@ export default function Panel(){
   const [] = useState()
 
 
-
   return(
 
     <div className="screen"> 
     
-    <form>
+    <form onSubmit={(e) => e.preventDefault()} >
 
       <input type="text" placeholder='Digite seu nome'/>     
       <input type="text" placeholder='Digite sua meta'/>     
