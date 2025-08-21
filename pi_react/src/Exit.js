@@ -16,6 +16,26 @@ function Exit() { //Aqui é JavaScript
     category_id: "",
     user_id: "",
   })  
+
+  async function createEntry(){
+      const{data: dU, error: eU} = await supabase.auth.getUser();
+  
+      if(eU) nav('/login', {replace: true})
+  
+      if(!dU) nav('/login', {replace: true})
+  
+      if(dU && !dU.id) nav('/login', {replace: true})
+  
+      entry = {... entry, user_id: dU.id}
+  
+      const { data, error } = await supabase
+      .from('entries')
+      .insert([
+        entry
+      ])
+      .select()
+          
+    }
   
   retunr (
     <div className="screen">
@@ -24,8 +44,12 @@ function Exit() { //Aqui é JavaScript
         <input type='text' placeholder='Descrição' onChange={(e) => setExit ({...exit, description: e.target.value})}/>
         <input type='number' placeholder='Valor' onChange={(e) => setExit ({...exit, value: e.target.value})}/>
         <input type='text' placeholder='essa é chave da categoria' onChange={(e) => setExit ({...exit, category_id: e.target.value})}/>
+
+        <button onClick={createEntry} > Salvar </button>
       </form>
     </div>
+
+
 
   );
    
