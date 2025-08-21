@@ -9,6 +9,7 @@ const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Exit() { //Aqui é JavaScript 
+  const nav = useNavigate();
   const [exit, setExit] = useState ({
     date:"",
     description:"",
