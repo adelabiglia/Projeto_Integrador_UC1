@@ -29,7 +29,7 @@ export default function Categories(){
     if(!dataUser) nav ('login', {replace: true})
     if(dataUser && !dataUser.id) nav ('login', {replace: true})*/
 
-    const uid = dataUser?.user?.uid
+    const uid = dataUser?.user?.id
 
     if(!uid) nav('/login', {replace:true})
 
