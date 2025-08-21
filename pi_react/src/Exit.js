@@ -22,13 +22,13 @@ function Exit() { //Aqui é JavaScript
   async function createExit(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
 
-      const uid = dU?.user?.uid
+      const uid = dU?.user?.id;
   
-      if(!uid) nav('/login', {replace: true})
+      if(!uid) nav('/login', {replace: true});
   
       const { data, error } = await supabase
       .from('exits')
-      .insert({... exit, user_id: uid})
+      .insert({... exit, user_id: uid});
       //.select()
           
     }
