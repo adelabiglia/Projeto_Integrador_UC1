@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
-
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Auth() { //Aqui é JavaScript 
@@ -33,7 +32,18 @@ function Auth() { //Aqui é JavaScript
     if(error) throw error;
 
     setMsg('Logou');
+
+    user = {...user, user_id: user}
+
+        
+    const { data: dU, error: eU } = await supabase
+    .from('users')
+    .insert([user])
+    .select()
+        
+
     localStorage.setItem('supaSession', data.session)
+
 
     setTimeout(
 
@@ -69,6 +79,16 @@ function Auth() { //Aqui é JavaScript
       if(error) throw error
       
       if(data.status == 400) throw data.message
+
+      
+    const { data: userData, error: userErro } = await supabase
+    .from('users')
+    .insert([
+    user,
+    ])
+
+.select()
+        
 
       setMsg("Cadastro Realizado!")
     }catch(e){
@@ -106,7 +126,7 @@ function Auth() { //Aqui é JavaScript
   }
   
   return(/* aqui é html */
-    <main className="App">
+    <div className="Screen">
       <div className="card">
       <button className='buttonSucess' onClick={() => setIslogin(!isLogin)} >
         {isLogin && ("Cadastrar-se")}
@@ -161,7 +181,7 @@ function Auth() { //Aqui é JavaScript
       </div>
 
       {msg && (<div className='toast'>{msg} </div>)}     
-    </main>
+    </div>
   ); 
 }
 
