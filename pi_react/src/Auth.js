@@ -35,11 +35,6 @@ function Auth() { //Aqui é JavaScript
  
 
         
-    const { data: dU, error: eU } = await supabase
-    .from('users')
-    .insert({...user, user_id: data.user.uid})
-    //.select()
-        
 
     localStorage.setItem('supaSession', data.session)
 
@@ -80,9 +75,10 @@ function Auth() { //Aqui é JavaScript
       if(data.status == 400) throw data.message
 
       
-    const { data: userData, error: userErro } = await supabase
+        
+    const { data: dU, error: eU } = await supabase
     .from('users')
-    .insert(user)
+    .insert({...user, user_id: data.user.uid})
     //.select()
         
 

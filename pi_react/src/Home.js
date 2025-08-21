@@ -24,9 +24,13 @@ function Home() { //Aqui é JavaScript
   async function createEntry(){
     const{data: dU, error: eU} = await supabase.auth.getUser();
 
-    const uid = dU?.user?.uid
+    console.log(dU)
+
+    const uid = dU?.user?.id
 
     if(!uid) nav('/login', {replace: true})
+
+    console.log({...entry, user_id: uid})
 
     const { data, error } = await supabase
     .from('entries')
