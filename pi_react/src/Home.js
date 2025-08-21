@@ -24,27 +24,21 @@ function Home() { //Aqui é JavaScript
   async function createEntry(){
     const{data: dU, error: eU} = await supabase.auth.getUser();
 
-    if(eU) nav('/login', {replace: true})
+    const uid = dU?.user?.uid
 
-    if(!dU) nav('/login', {replace: true})
-
-    if(dU && !dU.id) nav('/login', {replace: true})
-
-    entry = {... entry, user_id: dU.id}
+    if(!uid) nav('/login', {replace: true})
 
     const { data, error } = await supabase
     .from('entries')
-    .insert([
-      entry
-    ])
-    .select()
+    .insert({...entry, user_id: uid});
+    //.select();
         
   }
   
   return(/* aqui é html */
 
     <div className="screen">
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
       <input type="date" placeholder="Data" onChange={(e) => setEntry ({...entry, date: (e.target.value)})} />
       <input type="text" placeholder="Descrição" onChange={(e) => setEntry ({...entry, description: (e.target.value)})} />
       <input type="number" placeholder="Valor" onChange={(e) => setEntry ({...entry, value: (e.target.value)})} />
