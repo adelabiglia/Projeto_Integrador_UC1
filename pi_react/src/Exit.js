@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
+import { useState, useEffect } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
 import { createClient } from "@supabase/supabase-js";
 import { replace, useNavigate } from 'react-router-dom';
@@ -21,6 +21,10 @@ function Exit() { //Aqui é JavaScript
 
   const [exits, setExits] = useState ([])
 
+  useEffect(()=>{
+    readExits()
+  }, [])
+
   async function createExit(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
 
@@ -34,14 +38,24 @@ function Exit() { //Aqui é JavaScript
       //.select()
   }
 
-  async function readExits() {
-    let { data: dataExits, error } = await supabase
-    .from('exits')
-    .select('*')
+  async function readExits(filtro) {
 
-    setExits(dataExits);
+    if(filtro && filtro[0] && filtro[1]){
+      let { data: dataExits, error } = await supabase
+      .from('exits')
+      .select('*')
+      .eq(filtro[0], filtro[1])
+      setExits(dataExits);
+    }else{
+      let { data: dataExits, error } = await supabase
+      .from('exits')
+      .select('*')
+
+      setExits(dataExits);
+    }  
+    }
     
-  }
+  
   
   return (
     <div className="screen">
@@ -54,7 +68,16 @@ function Exit() { //Aqui é JavaScript
         <button onClick={createExit} > Salvar </button>
       </form>
 
-      <button onClick={readExits} > Procurar </button>
+      <div className='pesquisar'> 
+      <input type='date' placeholder='Data' onChange={(e) => setExit ({...exit, date: e.target.value})} />
+      <button onClick={()=> readExits(["date",exit.date])} > Buscar Datas </button>
+      <br/>
+      <input type='text' placeholder='Descrição' onChange={(e) => setExit ({...exit, description: e.target.value})}/>
+      <button onClick={()=> readExits(["description",exit.description])} > Buscar Descrição </button> 
+      <br/>
+      <button onClick={()=> readExits()} > Limpar </button>
+
+      </div>
 
       <div className='exitTable'>
       <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
@@ -76,8 +99,6 @@ function Exit() { //Aqui é JavaScript
             </tr>
             
           
-
-
           //<div className='cardExit' key={e.id}>
           //<br/><br/>
           //Data: {e.date}<br/>
