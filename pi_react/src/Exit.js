@@ -19,6 +19,8 @@ function Exit() { //Aqui é JavaScript
     user_id: "",
   })  
 
+  const [exits, setExits] = useState ([])
+
   async function createExit(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
 
@@ -30,8 +32,16 @@ function Exit() { //Aqui é JavaScript
       .from('exits')
       .insert({... exit, user_id: uid});
       //.select()
-          
-    }
+  }
+
+  async function readExits() {
+    let { data: dataExits, error } = await supabase
+    .from('exits')
+    .select('*')
+
+    setExits(dataExits);
+    
+  }
   
   return (
     <div className="screen">
@@ -43,6 +53,32 @@ function Exit() { //Aqui é JavaScript
 
         <button onClick={createExit} > Salvar </button>
       </form>
+
+      <button onClick={readExits} > Procurar </button>
+
+      <div className='exitTable'>
+      {exits.map(
+        e => (
+          <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
+            
+            <tr>
+              <th>Data: {e.date}</th>
+              <th>Descrição: {e.description}</th>
+              <th>Valor: R${e.value}</th>
+            </tr>
+            
+          </table>
+
+
+          //<div className='cardExit' key={e.id}>
+          //<br/><br/>
+          //Data: {e.date}<br/>
+          //Descrição: {e.description}<br/>
+          //Valor: R${e.value}<br/>
+          //</div>
+        )    
+      )}
+      </div>
     </div>
 
 

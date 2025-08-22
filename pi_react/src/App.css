@@ -23,6 +23,41 @@
     text-align: center;;
 
   }
+
+  .cardExit{
+
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 150px;
+    min-height: 100px;
+    text-align: center;;
+
+  }
+  .exitTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    text-align: center;
+}
+.exitTable th {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  padding: 10px;
+  text-align: center;
+}
+
+.exitTable td {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.exitTable tr:hover {
+  background-color: #2b4e1bab;
+}
     
   .login{
     color: black;
