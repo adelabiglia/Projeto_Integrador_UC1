@@ -21,6 +21,8 @@ function Home() { //Aqui é JavaScript
 
   })
 
+  const [entries, setEntries] = useState([])
+
   async function createEntry(){
     const{data: dU, error: eU} = await supabase.auth.getUser();
 
@@ -38,6 +40,16 @@ function Home() { //Aqui é JavaScript
     //.select();
         
   }
+
+  async function readEntry() {
+    
+    let { data: dataEntries, error } = await supabase
+    .from('entries')
+    .select('*');
+        
+    setEntries(dataEntries);
+    
+  }
   
   return(/* aqui é html */
 
@@ -51,7 +63,21 @@ function Home() { //Aqui é JavaScript
 
       <button onClick={createEntry} > Salvar </button>
       </form>
-    </div>
+
+      <button onClick={readEntry} > Buscar </button>
+
+      <div className='rowEntry'> 
+      {entries.map(
+        e => (
+          <div className="cardEntry" key={e.id}>
+            Descrição: {e.description}<br/>
+          </div>  
+        )
+      )}
+
+          </div>
+
+      </div>     
   ); 
 }
 
