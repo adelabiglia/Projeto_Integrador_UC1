@@ -137,3 +137,21 @@ nav a:hover {
   color: #0000ff;
 
 }
+
+.cardEntry{
+
+  background: #fff;
+  padding: 50px 50px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 150px;
+  min-height: 100px;
+  text-align: center;
+
+}
+
+.rowEntry{
+  display: flex;
+  
+}
