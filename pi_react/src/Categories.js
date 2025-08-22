@@ -21,8 +21,10 @@ export default function Categories(){
 
   })
 
+  const [categories, setCategories] = useState([])
 
   async function createCategorie(){
+    
     const {data: dataUser, error: errorUser} = await supabase.auth.getUser();
 
     /*if(errorUser) nav('login', {replace: true})
@@ -45,6 +47,16 @@ export default function Categories(){
   }
 
 
+  async function readCategories(){
+
+    let { data: dataCategories, error } = await supabase
+    .from('categories')
+    .select('*')
+    
+    setCategories(dataCategories);
+
+  }
+
   return(
 
     <div className="screen"> 
@@ -58,7 +70,24 @@ export default function Categories(){
       <button onClick={createCategorie}> Salvar </button>  
 
     </form>
+
+    <button onClick={readCategories}>Buscar</button>
     
+    <div className='row'>
+    {categories.map(
+    
+
+        c => ( 
+          <div className='cardGame' key={c.id}>
+           Nome: {c.name}
+           <a url={c.url}></a>
+           <p>{c.meta}</p>
+
+          </div>
+        )
+
+    )}
+    </div>
     </div>
 
   );
