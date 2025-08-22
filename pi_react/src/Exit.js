@@ -24,7 +24,7 @@ function Exit() { //Aqui é JavaScript
 
       const uid = dU?.user?.id;
   
-      if(!uid) nav('/login', {replace: true});
+      if(!uid) nav('/login', {replace: true})
   
       const { data, error } = await supabase
       .from('exits')
