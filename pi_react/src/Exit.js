@@ -57,17 +57,25 @@ function Exit() { //Aqui é JavaScript
       <button onClick={readExits} > Procurar </button>
 
       <div className='exitTable'>
-      {exits.map(
-        e => (
-          <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
+      <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
             
             <tr>
-              <th>Data: {e.date}</th>
-              <th>Descrição: {e.description}</th>
-              <th>Valor: R${e.value}</th>
+              <th>Data: </th>
+              <th>Descrição: </th>
+              <th>Valor: </th>
             </tr>
             
-          </table>
+          
+      {exits.map(
+        e => (
+                      
+            <tr>
+              <td>{e.date}</td>
+              <td>{e.description}</td>
+              <td>R$ {e.value}</td>
+            </tr>
+            
+          
 
 
           //<div className='cardExit' key={e.id}>
@@ -78,6 +86,7 @@ function Exit() { //Aqui é JavaScript
           //</div>
         )    
       )}
+      </table>
       </div>
     </div>
 
