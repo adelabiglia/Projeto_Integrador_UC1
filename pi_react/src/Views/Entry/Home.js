@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
+import { useState, useEffect} from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import './App.css';
 import { createClient } from "@supabase/supabase-js";
 import { replace, useNavigate } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { replace, useNavigate } from 'react-router-dom';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
-
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Home() { //Aqui é JavaScript 
@@ -22,6 +21,10 @@ function Home() { //Aqui é JavaScript
   })
 
   const [entries, setEntries] = useState([])
+
+  useEffect(()=>{
+    readEntries()
+  }, [])
 
   async function createEntry(){
     const{data: dU, error: eU} = await supabase.auth.getUser();
@@ -41,14 +44,21 @@ function Home() { //Aqui é JavaScript
         
   }
 
-  async function readEntry() {
-    
-    let { data: dataEntries, error } = await supabase
-    .from('entries')
-    .select('*');
-        
-    setEntries(dataEntries);
-    
+  async function readEntries(filtro) {
+
+    if(filtro && filtro[0] && filtro[1]){
+      let { data: dataEntries, error } = await supabase
+      .from('entries')
+      .select('*')
+      .eq(filtro[0], filtro[1])
+      setEntries(dataEntries);
+    }else{
+      let { data: dataEntries, error } = await supabase
+      .from('entries')
+      .select('*')
+
+      setEntries(dataEntries);
+    }  
   }
   
   return(/* aqui é html */
@@ -64,20 +74,31 @@ function Home() { //Aqui é JavaScript
       <button onClick={createEntry} > Salvar </button>
       </form>
 
-      <button onClick={readEntry} > Buscar </button>
+      <button onClick={readEntries} > Buscar </button>
 
       <div className='rowEntry'> 
+      <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
+
+         <tr>
+            <th>Data: </th>
+            <th>Descrição: </th>
+            <th>Valor: </th>
+          </tr>
+
       {entries.map(
         e => (
-          <div className="cardEntry" key={e.id}>
-            Descrição: {e.description}<br/>
-          </div>  
+        <tr>
+          <td>{e.date}</td>
+          <td>{e.description}</td>
+          <td>R$ {e.value}</td>
+        </tr>
         )
       )}
+      </table>
 
-          </div>
-
-      </div>     
+      </div>
+      </div>
+  
   ); 
 }
 

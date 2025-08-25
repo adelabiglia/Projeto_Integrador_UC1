@@ -20,6 +20,23 @@
     width: 100%;
     max-width: 350px;
     min-height: 525px;
+    text-align: center;
+
+  }
+
+  .row{
+    display: inline-flex;
+  }
+
+  .cardGame{
+
+    background: #fff;
+    padding: 30px 110px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    width: 10%;
+    max-width: 350px;
+    min-height: 25px;
     text-align: center;;
 
   }
