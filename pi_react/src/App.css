@@ -75,6 +75,24 @@
 .exitTable tr:hover {
   background-color: #2b4e1bab;
 }
+
+.pesquisar{
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  padding: 20px 5px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.pesquisar button{
+  padding: 4px 15px;
+  border-radius: 15px;
+  color: #333;
+  font-size: 15px;
+  background-color: rgb(219, 218, 218);
+}
     
   .login{
     color: black;
