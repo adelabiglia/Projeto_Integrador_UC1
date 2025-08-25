@@ -4,7 +4,7 @@ import Auth from './Views/Users/Auth';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
 import Entry from './Views/Entry/Entry';
 import Panel from './Views/Users/Panel';
-import Categories from './Categories';
+import Categories from './Views/Categories/Categories';
 import Exit from './Views/Exit/Exit';
 
 
@@ -15,7 +15,7 @@ function PrivateSessioon(){
 
 function App() { //Aqui é JavaScript 
   const hasSession = !! localStorage.getItem('supaSession')
-    
+     
   return(/* aqui é html */
     <Router>
       <main className="App">
@@ -44,7 +44,7 @@ function App() { //Aqui é JavaScript
           <Route element={<PrivateSessioon/>}> 
           {/* Route = Rotas Logado*/}
            
-            <Route path='/categories' element={<Categories/>} />  
+            <Route path='/categories' element={<Categories/>} />
             <Route path='/Panel' element={<Panel/>} /> 
             <Route path='/entry' element={<Entry/>} />  
             <Route path='/Exit' element={<Exit/>} />  
