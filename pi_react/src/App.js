@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 're
 import Home from './Home';
 import Panel from './Panel';
 import Categories from './Categories';
-import Exit from './Exit';
+import Exit from './Views/Exit/Exit';
 
 
 function PrivateSessioon(){
