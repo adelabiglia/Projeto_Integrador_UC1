@@ -2,7 +2,7 @@
 import './App.css';
 import Auth from './Views/Users/Auth';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
-import Home from './Home';
+import Entry from './Views/Entry/Entry';
 import Panel from './Views/Users/Panel';
 import Categories from './Categories';
 import Exit from './Views/Exit/Exit';
@@ -22,7 +22,7 @@ function App() { //Aqui é JavaScript
         <nav>
           {hasSession ? (
             <>
-              <Link to="/home">Inicio</Link>
+              <Link to="/entry">Inicio</Link>
               <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
               <Link to="/Panel">Painel</Link>
@@ -30,7 +30,7 @@ function App() { //Aqui é JavaScript
             </>
           ) : (
             <>
-              <Link to="/home">Inicio</Link>
+              <Link to="/entry">Inicio</Link>
               <Link to="/login">Entrar</Link>
             </>
           )}
@@ -46,7 +46,7 @@ function App() { //Aqui é JavaScript
            
             <Route path='/categories' element={<Categories/>} />  
             <Route path='/Panel' element={<Panel/>} /> 
-            <Route path='/home' element={<Home/>} />  
+            <Route path='/entry' element={<Entry/>} />  
             <Route path='/Exit' element={<Exit/>} />  
 
           </Route>
