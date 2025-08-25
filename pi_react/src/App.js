@@ -2,7 +2,7 @@
 import './App.css';
 import Auth from './Views/Users/Auth';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
-import Entry from './Views/Entry/Entry';
+import Entry from './Views/Entry/Index';
 import Panel from './Views/Users/Panel';
 import Categories from './Views/Categories/Categories';
 import Exit from './Views/Exit/Index';
