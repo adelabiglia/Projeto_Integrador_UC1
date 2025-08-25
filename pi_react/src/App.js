@@ -1,10 +1,12 @@
 
 import './App.css';
-import Auth from './Auth';
+import Auth from './Views/Users/Auth';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
 import Home from './Home';
 import Panel from './Panel';
 import Categories from './Views/Categories/Categories';
+import Panel from './Views/Users/Panel';
+import Categories from './Categories';
 import Exit from './Exit';
 
 
