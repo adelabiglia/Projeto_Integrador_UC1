@@ -4,7 +4,7 @@ import Auth from './Views/Users/Auth';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
 import Entry from './Views/Entry/Entry';
 import Panel from './Views/Users/Panel';
-import Categories from './Views/Categories/Categories';
+import Categories from './Views/Categories/Index';
 import Exit from './Views/Exit/Exit';
 
 
