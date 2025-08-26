@@ -78,7 +78,7 @@ export default function Categories(){
     
 
         c => ( 
-          <div className='cardGame' key={c.id}>
+          <div className='cardGame' key={c.id} onClick={() => nav(`/categories/${c.id}`, {replace: true} )}>
            Nome: {c.name}
            <a url={c.url}></a>
            <p>{c.meta}</p>
