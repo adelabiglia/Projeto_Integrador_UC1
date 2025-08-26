@@ -121,7 +121,7 @@ body{
   padding: 30px 190px 106px 190px;
   font-family: ' Geneva ';
   display: block;
-  flex-direction: initial;
+  /*flex-direction: initial;*/
   margin: auto;
 }
 
@@ -224,4 +224,11 @@ nav a:hover {
 .rowEntry{
   display: flex;
   
+}
+
+.imageProfile {
+   display: flex;
+   position: absolute;
+   right: 80px;
+   
 }
