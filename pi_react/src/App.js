@@ -6,6 +6,7 @@ import Entry from './Views/Entry/Index';
 import Panel from './Views/Users/Panel';
 import Profile from './Views/Users/Profile';
 import Categories from './Views/Categories/Index';
+import CategoriesShow from './Views/Categories/Show';
 import Exit from './Views/Exit/Index';
 
 
@@ -48,6 +49,7 @@ function App() { //Aqui é JavaScript
           {/* Route = Rotas Logado*/}
            
             <Route path='/categories' element={<Categories/>} />
+            <Route path='/categories/:id' element={<CategoriesShow/>} />
             <Route path='/Panel' element={<Panel/>} /> 
             <Route path='/entry' element={<Entry/>} />  
             <Route path='/Exit' element={<Exit/>} />  
