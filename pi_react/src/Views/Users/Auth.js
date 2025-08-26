@@ -83,11 +83,15 @@ function Auth() { //Aqui é JavaScript
       
       if(data.status == 400) throw data.message
 
-      
+    const uid = data?.user?.id  
+
+    if (!uid) nav("/login", {replace:true})
+
+    let sendU =   {...user, user_id: uid}
         
     const { data: dU, error: eU } = await supabase
     .from('users')
-    .insert({...user, user_id: data.user.uid})
+    .insert(sendU)
     //.select()
         
 
