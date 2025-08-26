@@ -30,7 +30,7 @@ function App() { //Aqui é JavaScript
               <Link to="/categories">Categorias</Link>
               <Link to="/Panel">Painel</Link>
               <Link to="/Exit">Sair</Link>
-              <Link to="/profile/">Sair</Link>
+              <Link className= "imageProfile" to="/profile/">Profile</Link>
             </>
           ) : (
             <>
