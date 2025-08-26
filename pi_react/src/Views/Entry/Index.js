@@ -4,7 +4,6 @@ import { useState, useEffect} from 'react'; //useState ele retorna para gente um
 import { createClient } from "@supabase/supabase-js";
 import { replace, useNavigate } from 'react-router-dom';
 
-
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -31,7 +30,7 @@ function Home() { //Aqui é JavaScript
 
     console.log(dU)
 
-    const uid = dU?.user?.id
+    const uid = dU?.user?.id;
 
     if(!uid) nav('/login', {replace: true})
 
@@ -74,7 +73,16 @@ function Home() { //Aqui é JavaScript
       <button onClick={createEntry} > Salvar </button>
       </form>
 
-      <button onClick={readEntries} > Buscar </button>
+      <div className='pesquisar'> 
+      <input type='date' placeholder='Data' onChange={(e) => setEntry ({...entry, date: e.target.value})} />
+      <button onClick={()=> readEntries(["date",entry.date])} > Buscar Datas </button>
+      <br/>
+      <input type='text' placeholder='Descrição' onChange={(e) => setEntry ({...entry, description: e.target.value})}/>
+      <button onClick={()=> readEntries(["description",entry.description])} > Buscar Descrição </button> 
+      <br/>
+      <button onClick={()=> readEntries()} > Limpar </button>
+
+      </div>
 
       <div className='rowEntry'> 
       <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
@@ -87,7 +95,7 @@ function Home() { //Aqui é JavaScript
 
       {entries.map(
         e => (
-        <tr>
+        <tr key={e.id} onClick={() => nav( `/entry/${e.id}` , {replace: true })} >
           <td>{e.date}</td>
           <td>{e.description}</td>
           <td>R$ {e.value}</td>
@@ -97,7 +105,7 @@ function Home() { //Aqui é JavaScript
       </table>
 
       </div>
-      </div>
+    </div>
   
   ); 
 }
