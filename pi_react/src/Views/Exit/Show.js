@@ -13,6 +13,8 @@ function Exit() { //Aqui é JavaScript
   const nav = useNavigate();
   const {id} = useParams();
 
+  console.log()
+
   const [exit, setExit] = useState ({
     date:"",
     description:"",

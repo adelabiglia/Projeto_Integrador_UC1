@@ -3,12 +3,13 @@ import './App.css';
 import Auth from './Views/Users/Auth';
 import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
 import Entry from './Views/Entry/Index';
+import EntryShow from './Views/Entry/Show';
 import Panel from './Views/Users/Panel';
 import Profile from './Views/Users/Profile';
 import Categories from './Views/Categories/Index';
 import CategoriesShow from './Views/Categories/Show';
 import Exit from './Views/Exit/Index';
-
+import ExitShow from './Views/Exit/Show';
 
 
 function PrivateSessioon(){
@@ -29,7 +30,7 @@ function App() { //Aqui é JavaScript
               <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
               <Link to="/Panel">Painel</Link>
-              <Link to="/Exit">Sair</Link>
+              <Link to="/exit">Sair</Link>
               <Link className= "imageProfile" to="/profile/">Profile</Link>
             </>
           ) : (
@@ -52,7 +53,9 @@ function App() { //Aqui é JavaScript
             <Route path='/categories/:id' element={<CategoriesShow/>} />
             <Route path='/Panel' element={<Panel/>} /> 
             <Route path='/entry' element={<Entry/>} />  
-            <Route path='/Exit' element={<Exit/>} />  
+            <Route path='/entry/:id' element={<EntryShow/>} />
+            <Route path='/exit' element={<Exit/>} />  
+            <Route path='/exit/:id' element={<ExitShow/>} />
             <Route path='/profile' element={<Profile/>} />  
 
           </Route>
