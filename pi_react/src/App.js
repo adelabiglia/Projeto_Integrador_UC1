@@ -6,6 +6,7 @@ import Entry from './Views/Entry/Index';
 import Panel from './Views/Users/Panel';
 import Categories from './Views/Categories/Index';
 import Exit from './Views/Exit/Index';
+import EntryShow from './Views/Entry/Show';
 
 
 function PrivateSessioon(){
@@ -48,6 +49,7 @@ function App() { //Aqui é JavaScript
             <Route path='/Panel' element={<Panel/>} /> 
             <Route path='/entry' element={<Entry/>} />  
             <Route path='/Exit' element={<Exit/>} />  
+            <Route path='/entry/:id' element={<EntryShow/>} /> 
 
           </Route>
           <Route path='/' element={<Navigate to='/login' replace/>}/>
