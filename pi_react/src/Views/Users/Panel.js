@@ -12,6 +12,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function Panel(){
 
   const [] = useState()
+  
 
 
   return(

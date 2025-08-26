@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'; //useState ele retorna para gente u
 import { createClient } from "@supabase/supabase-js";
 import { replace, useNavigate } from 'react-router-dom';
 
-
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -53,9 +52,7 @@ function Exit() { //Aqui é JavaScript
 
       setExits(dataExits);
     }  
-    }
-    
-  
+    } 
   
   return (
     <div className="screen">
@@ -76,7 +73,6 @@ function Exit() { //Aqui é JavaScript
       <button onClick={()=> readExits(["description",exit.description])} > Buscar Descrição </button> 
       <br/>
       <button onClick={()=> readExits()} > Limpar </button>
-
       </div>
 
       <div className='exitTable'>
@@ -92,11 +88,11 @@ function Exit() { //Aqui é JavaScript
       {exits.map(
         e => (
                       
-            <tr>
+          <tr key={e.id} onClick={() => nav( `/exit/${e.id}`, {replace: true})}  >
               <td>{e.date}</td>
               <td>{e.description}</td>
               <td>R$ {e.value}</td>
-            </tr>
+          </tr>
             
           
           //<div className='cardExit' key={e.id}>
@@ -104,15 +100,13 @@ function Exit() { //Aqui é JavaScript
           //Data: {e.date}<br/>
           //Descrição: {e.description}<br/>
           //Valor: R${e.value}<br/>
-          //</div>
+          //</div>}
+          
         )    
       )}
       </table>
       </div>
     </div>
-
-
-
   );
    
 }

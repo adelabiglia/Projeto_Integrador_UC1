@@ -19,6 +19,18 @@ function Auth() { //Aqui é JavaScript
 
   const [msg, setMsg] = useState("");
 
+  const [user, setUser] = useState({
+    name: "",
+    birth:"",
+    address:"",
+    number:"",
+    neighborhood: "",
+    city:"",
+    email:"",
+    password:"",
+  })
+
+
   async function logar() {
     setLoading(true)
 
@@ -32,9 +44,6 @@ function Auth() { //Aqui é JavaScript
     if(error) throw error;
 
     setMsg('Logou');
- 
-
-        
 
     localStorage.setItem('supaSession', data.session)
 
@@ -102,17 +111,7 @@ function Auth() { //Aqui é JavaScript
     name: "",
   });*/
   
-  const [user, setUser] = useState({
-    name: "",
-    birth:"",
-    address:"",
-    number:"",
-    neighborhood: "",
-    city:"",
-    email:"",
-    password:"",
-  })
-
+  
   function enviar(){
     alert("Email:  " +user.email+ "\nSenha:  " +user.password)
   }
