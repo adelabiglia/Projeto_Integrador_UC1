@@ -2,8 +2,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f7f9fb;
-    margin: 100px;
-    padding: 200px;
+    margin: 0;
+    padding: 20px;
     color: #333;
 }
 
@@ -92,4 +92,23 @@ input[type="submit"]:hover {
     background-color: #2b4e1bab;
 }
 
-        
+.titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espaço entre o h2 e o p */
+  }
+  
+  .titulo h2 {
+    margin: 0;
+  }
+  
+  .titulo p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+
+  .screen {
+    width: 100%;
+}

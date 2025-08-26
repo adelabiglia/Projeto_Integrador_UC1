@@ -29,7 +29,7 @@ function App() { //Aqui é JavaScript
               <Link to="/entry">Inicio</Link>
               <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
-              <Link to="/Panel">Painel</Link>
+              <Link to="/panel">Painel</Link>
               <Link to="/exit">Sair</Link>
               <Link className= "imageProfile" to="/profile/">Profile</Link>
             </>
@@ -51,7 +51,7 @@ function App() { //Aqui é JavaScript
            
             <Route path='/categories' element={<Categories/>} />
             <Route path='/categories/:id' element={<CategoriesShow/>} />
-            <Route path='/Panel' element={<Panel/>} /> 
+            <Route path='/panel' element={<Panel/>} /> 
             <Route path='/entry' element={<Entry/>} />  
             <Route path='/entry/:id' element={<EntryShow/>} />
             <Route path='/exit' element={<Exit/>} />  
