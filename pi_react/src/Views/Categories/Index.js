@@ -1,5 +1,5 @@
 /*import logo from './logo.svg';*/
-import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
+import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 /*import './App.css';*/
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +22,10 @@ export default function Categories(){
   })
 
   const [categories, setCategories] = useState([])
+
+  useEffect( () => {
+    readCategories()
+  }, [])
 
   async function createCategorie(){
     
