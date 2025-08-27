@@ -1,5 +1,5 @@
 
-import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
+import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import { createClient } from "@supabase/supabase-js";
 import './painel_administrativo.css';
 
@@ -12,7 +12,24 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function Panel(){
   
 
-  const [filterType, setFilterType] = useState("all");  
+  const [filterType, setFilterType] = useState("all");
+
+  const [users, setUsers] = useState([]);
+  
+  useEffect( () => {
+    readUsers()
+  }, [])
+
+
+  async function readUsers(){
+
+    let { data: dataUsers, error } = await supabase
+    .from('users')
+    .select('*')
+    
+    setUsers (dataUsers);
+
+  }
 
 
   return (
@@ -56,35 +73,21 @@ export default function Panel(){
           <tr>
             <th>Nome</th>
             <th>Email</th>
-            <th>Plano</th>
-            <th>Status</th>
+            <th>Cidade</th>
+            <th>Data de nascimento</th>
           </tr>
         </thead>
         <tbody>
+         { users.map(
+          u => (
           <tr>
-            <td>Maria Oliveira</td>
-            <td>maria@email.com</td>
-            <td>Premium</td>
-            <td>Ativo</td>
+            <td>{u.name}</td>
+            <td>{u.email}</td>
+            <td>{u.city}</td>
+            <td>{u.birth}</td>
           </tr>
-          <tr>
-            <td>Carlos Souza</td>
-            <td>carlos@email.com</td>
-            <td>Free</td>
-            <td>Inativo</td>
-          </tr>
-          <tr>
-            <td>Ana Costa</td>
-            <td>ana@email.com</td>
-            <td>Premium</td>
-            <td>Ativo</td>
-          </tr>
-          <tr>
-            <td>Juliana Souza</td>
-            <td>jusouza@email.com</td>
-            <td>Free</td>
-            <td>Ativo</td>
-          </tr>
+          ))
+        }
         </tbody>
       </table>
     </div>
