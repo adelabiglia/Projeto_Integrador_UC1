@@ -73,25 +73,63 @@
 
 .exitTable tr:hover {
   background-color: #2b4e1bab;
+  color: white;
+  transition-duration: 0.6s;
 }
 
-.pesquisar{
-  display: flex;
+
+.screen {/* Input entradas e saidas*/
+  align-items: baseline;
   justify-content: space-around;
-  background: #fff;
-  padding: 20px 5px;
+  background:#ecf0f1;
+  padding: 5px 5px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 10px 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.screen button{
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  color: #333;
+  font-size: 10px;
+  background-color: rgba(156, 156, 156, 0.589);
+  font-weight: bold;
+}
+
+.screen button:hover {
+  background:linear-gradient(to bottom, #6f8868 100%, white 50%);
+	background-color:#6c7c7c;
+  color: white;
+  transition-duration: 0.4s;
+}
+
+.pesquisar{/* Buscar datas e buscar descrições*/
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  background:#ecf0f1;
+  padding: 5px 5px;
+  border-radius: 12px;
+  box-shadow: 10px 6px 20px rgba(0,0,0,0.1);
   text-align: center;
   
 }
-
 .pesquisar button{
-  padding: 4px 15px;
-  border-radius: 15px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
   color: #333;
-  font-size: 15px;
+  font-size: 12px;
+  background-color: rgba(156, 156, 156, 0.589);
+  font-weight: bold;
+}
 
+.pesquisar button:hover {
+	background:linear-gradient(to bottom, #6f8868 100%, white 50%);
+	background-color:#6c7c7c;
+  transition-duration: 0.4s;
 }
     
   .login{
@@ -101,7 +139,7 @@
     
   }
 
-.buttonSucess {
+/*.buttonSucess {
   height: 30px;
   padding: 7px;
   margin: 10px 0;
@@ -114,14 +152,14 @@
   max-width: 100%;
   text-align: center;
 
-}
+}*/
 
 body{
   background:#869dcc;
   padding: 30px 190px 106px 190px;
   font-family: ' Geneva ';
   display: block;
-  flex-direction: initial;
+  /*flex-direction: initial;*/
   margin: auto;
 }
 
@@ -224,4 +262,11 @@ nav a:hover {
 .rowEntry{
   display: flex;
   
+}
+
+.imageProfile {
+   display: flex;
+   position: absolute;
+   right: 80px;
+   
 }

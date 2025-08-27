@@ -1,7 +1,7 @@
 
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
-
 import { createClient } from "@supabase/supabase-js";
+import './painel_administrativo.css';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -10,26 +10,85 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 
 export default function Panel(){
-
-  const [] = useState()
   
 
+  const [filterType, setFilterType] = useState("all");  
 
-  return(
 
-    <div className="screen"> 
+  return (
+
+
     
-    <form onSubmit={(e) => e.preventDefault()} >
 
-      <input type="text" placeholder='Digite seu nome'/>     
-      <input type="text" placeholder='Digite sua meta'/>     
-      <input type="text" placeholder='http://exemple.com'/>     
+    <div className="screen">
 
-    </form>
-    
+      <br/><br/> 
+      <h1>Painel Administrativo</h1>
+      <br/><br/> 
+      <hr/>
+
+      <div className="titulo">
+        <h2>Usuários</h2>
+        <p>Gerenciamento de usuários do sistema</p>
+      </div>
+
+      <br/> 
+      
+      <form onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="filterType">Filtrar por tipo:</label>
+        <select
+          id="filterType"
+          name="filterType"
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+        >
+          <option value="all">Todos</option>
+          <option value="Free">Free</option>
+          <option value="Premium">Premium</option>
+        </select>
+        <input type="submit" value="Filtrar" />
+      </form>
+
+      <br />
+
+      <table className="tabela" border="1" cellPadding="5" cellSpacing="0">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Plano</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Maria Oliveira</td>
+            <td>maria@email.com</td>
+            <td>Premium</td>
+            <td>Ativo</td>
+          </tr>
+          <tr>
+            <td>Carlos Souza</td>
+            <td>carlos@email.com</td>
+            <td>Free</td>
+            <td>Inativo</td>
+          </tr>
+          <tr>
+            <td>Ana Costa</td>
+            <td>ana@email.com</td>
+            <td>Premium</td>
+            <td>Ativo</td>
+          </tr>
+          <tr>
+            <td>Juliana Souza</td>
+            <td>jusouza@email.com</td>
+            <td>Free</td>
+            <td>Ativo</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
+
   );
-
-
 }
