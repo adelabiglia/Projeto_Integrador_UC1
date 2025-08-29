@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'; //useState ele retorna para gente u
 //import './App.css';
 import { createClient } from "@supabase/supabase-js";
 import { replace, useNavigate } from 'react-router-dom';
+import CloseButton from 'react-bootstrap/CloseButton'
+import Button from 'react-bootstrap/Button';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
@@ -53,6 +55,13 @@ function Exit() { //Aqui é JavaScript
       setExits(dataExits);
     }  
     } 
+
+  async function delExit(id){
+    const { error } = await supabase
+      .from('exits')
+      .delete()
+      .eq('id', id)
+  }  
   
   return (
     <div className="screen">
@@ -82,16 +91,20 @@ function Exit() { //Aqui é JavaScript
               <th>Data: </th>
               <th>Descrição: </th>
               <th>Valor: </th>
+              <th>Excluir </th>
+              <th>Editar </th>
             </tr>
             
           
       {exits.map(
         e => (
                       
-          <tr key={e.id} onClick={() => nav( `/exit/${e.id}`, {replace: true})}  >
+          <tr key={e.id}   >
               <td>{e.date}</td>
               <td>{e.description}</td>
               <td>R$ {e.value}</td>
+              <td><Button variant="danger" onClick={()=> delExit(e.id)}>Excluir</Button></td>
+              <td><Button variant="warning" onClick={() => nav( `/exit/${e.id}`, {replace: true})}>Editar</Button></td>
           </tr>
             
           
