@@ -1,6 +1,5 @@
 
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
-
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
 

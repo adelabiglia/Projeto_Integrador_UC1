@@ -5,11 +5,12 @@ import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 're
 import Entry from './Views/Entry/Index';
 import EntryShow from './Views/Entry/Show';
 import Panel from './Views/Users/Panel';
-import Profile from './Views/Users/Profile';
 import Categories from './Views/Categories/Index';
 import CategoriesShow from './Views/Categories/Show';
 import Exit from './Views/Exit/Index';
 import ExitShow from './Views/Exit/Show';
+import Profile from './Views/Users/Profile';
+
 
 
 function PrivateSessioon(){
@@ -27,7 +28,6 @@ function App() { //Aqui é JavaScript
           {hasSession ? (
             <>
               <Link to="/entry">Inicio</Link>
-              <Link to="/users">Usuário</Link>
               <Link to="/categories">Categorias</Link>
               <Link to="/panel">Painel</Link>
               <Link to="/exit">Sair</Link>
@@ -55,8 +55,9 @@ function App() { //Aqui é JavaScript
             <Route path='/entry' element={<Entry/>} />  
             <Route path='/entry/:id' element={<EntryShow/>} />
             <Route path='/exit' element={<Exit/>} />  
-            <Route path='/exit/:id' element={<ExitShow/>} />
+            <Route path='/exit/:id' element={<ExitShow/>} />  
             <Route path='/profile' element={<Profile/>} />  
+           
 
           </Route>
           <Route path='/' element={<Navigate to='/login' replace/>}/>
