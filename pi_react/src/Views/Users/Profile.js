@@ -1,8 +1,7 @@
 
-import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
-
+import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela
 import { createClient } from "@supabase/supabase-js";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -12,6 +11,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 function Auth() { //Aqui é JavaScript 
 
   const nav = useNavigate();
+
+  const {id} = useParams();
 
   const [isLogin, setIslogin] = useState(true);
 
@@ -35,6 +36,22 @@ function Auth() { //Aqui é JavaScript
   }
   , [])
 
+
+  async function updateProfile(){
+        const{data: dU, error: eU} = await supabase.auth.getUser();
+  
+        const uid = dU?.user?.id;
+    
+        if(!uid) nav('/login', {replace: true})
+    
+        const { data, error } = await supabase
+        .from('users')
+        .update({... user, user_id: uid})
+        .eq('id', id);
+        //.select()
+    }
+  
+
   
   async function readProfile() {
 
@@ -56,37 +73,26 @@ function Auth() { //Aqui é JavaScript
    
     }
 
-  async function register (){
-    setLoading(true);
-
-    try{
-      let { data, error } = await supabase.auth.signUp({
-        email: user.email,
-        password: user.password
-      })
-
-      if(error) throw error
-      
-      if(data.status == 400) throw data.message
-
-      
-        
-    const { data: dU, error: eU } = await supabase
-    .from('users')
-    .insert({...user, user_id: data.user.uid})
-    //.select()
-        
-
-      setMsg("Cadastro Realizado!")
-    }catch(e){
-      setMsg(`Error: ${e.message}`)
-
+    async function updateProfile() {
+      const { data: dU, error: eU } = await supabase.auth.getUser();
+      const uid = dU?.user?.id;
+    
+      if (!uid) return nav('/login', { replace: true });
+    
+      const { error } = await supabase
+        .from('users')
+        .update({ ...user })
+        .eq('user_id', uid);
+    
+      if (error) {
+        setMsg(`Erro ao atualizar: ${error.message}`);
+      } else {
+        setMsg("Perfil atualizado com sucesso!");
+      }
+    
+      setTimeout(() => setMsg(""), 4000);
     }
-    setLoading(false)
-
-    setTimeout(() => setMsg("") , 5000);
-  }
-  
+    
 
   
   return(/* aqui é html */
@@ -121,6 +127,8 @@ function Auth() { //Aqui é JavaScript
         </label>
        
         
+        <button className="buttonSucess" onClick={updateProfile} disabled={loading} > {loading ? "Salvando..." : "Salvar"} </button>
+
       </form>
    
       </div>

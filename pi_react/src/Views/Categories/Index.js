@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'; //useState ele retorna para gente u
 /*import './App.css';*/
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -82,15 +84,21 @@ export default function Categories(){
     
 
         c => ( 
-          <div className='cardGame' key={c.id} onClick={() => nav(`/categories/${c.id}`, {replace: true} )}>
+          <div className='cardGame' key={c.id} >
            Nome: {c.name}
            <a url={c.url}></a>
            <p>{c.meta}</p>
+
+           <td><Button variant="danger">Excluir</Button></td>
+           <td><Button variant="warning" onClick={() => nav(`/categories/${c.id}`, {replace: true} )}>Editar</Button></td>
 
           </div>
         )
 
     )}
+
+    
+    
     </div>
     </div>
 

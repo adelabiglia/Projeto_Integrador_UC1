@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import { createClient } from "@supabase/supabase-js";
 import './painel_administrativo.css';
+import Button from 'react-bootstrap/Button';
+
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -11,7 +13,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function Panel(){
   
-
+  
   const [filterType, setFilterType] = useState("all");
 
   const [users, setUsers] = useState([]);
@@ -75,6 +77,7 @@ export default function Panel(){
             <th>Email</th>
             <th>Cidade</th>
             <th>Data de nascimento</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -85,9 +88,16 @@ export default function Panel(){
             <td>{u.email}</td>
             <td>{u.city}</td>
             <td>{u.birth}</td>
+
           </tr>
+          
           ))
         }
+
+        
+
+
+
         </tbody>
       </table>
     </div>
