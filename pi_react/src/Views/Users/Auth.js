@@ -2,6 +2,7 @@
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
+import { Input } from '../../Components/input';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -131,30 +132,86 @@ const supabase = createClient(supabaseUrl, supabaseKey);
   
       {!isLogin && (
       <form className="register" onSubmit={(e) => e.preventDefault()}>
-        <label>
-          Nome: <br/><input type="text" name="Nome" placeholder="Digite Seu Nome" onChange={(e) => setUser({...user, name: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Data de Nascimento: <br/><input type="text" name="Data de Nascimento" placeholder="Digite Sua Data de Nascimento" onChange={(e) => setUser({...user, birth: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Endereço: <br/><input type="text" name="Endereço" placeholder="Digite Seu Endereço" onChange={(e) => setUser({...user, address: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Numero: <br/><input type="text" name="Numero" placeholder="Digite o Número da Sua Residência " onChange={(e) => setUser({...user, number: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Bairro: <br/><input type="text" name="Bairro" placeholder="Digite Seu Bairro" onChange={(e) => setUser({...user, neighborhood: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Cidade: <br/><input type="text" name="Cidade" placeholder="Digite Sua Cidade" onChange={(e) => setUser({...user, city: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Email: <br/><input type="text" name="Email" placeholder="Digite seu Email" onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Senha: <br/><input type="password" name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
-        </label>
+        
+        <Input 
+        label= "Nome"
+        type="text" 
+        placeholder="Digite Seu Nome"
+        onChange={setUser} 
+        objeto={user}
+        campo="name"
+        /><br/>
+        
+        
+         <Input
+         label= "Data de Nascimento"
+         type="text"
+         placeholder="Digite Sua Data de Nascimento" 
+         onChange={setUser}
+         objeto={user}
+         campo="birth"
+         /><br/>
+        
+        
+        <Input 
+        label= "Endereço"
+        type="text" 
+        placeholder="Digite Seu Endereço" 
+        onChange={ setUser } 
+        objeto={user}
+        campo="address"
+        /><br/>
+       
+        
+        <Input 
+        label= "Número"
+        type="text"  
+        placeholder="Digite o Número da Sua Residência " 
+        onChange={ setUser } 
+        objeto={user}
+        campo="number"
+        /><br/>
+       
+        
+        <Input 
+        label= "Bairro"
+        type="text" 
+        placeholder="Digite Seu Bairro"
+        onChange={setUser} 
+        objeto={user}
+        campo="neighborhood"
+        /><br/>
+      
+       
+        <Input 
+        label= "Cidade"
+        type="text"  
+        placeholder="Digite Sua Cidade" 
+        onChange={ setUser } 
+        objeto={user}
+        campo="city"
+        /><br/>
+        
+        
+        <Input 
+        label= "Email"
+        type="text"  
+        placeholder="Digite seu Email" 
+        onChange={setUser}
+        objeto={user}
+        campo="email"  
+        /><br/>
+      
+      
+        <Input 
+        label= "Senha"
+        type="password" 
+        placeholder="Digite Sua Senha" 
+        onChange={setUser} 
+        objeto={user}
+        campo="password"
+        /><br/>
+      
         <button className="buttonSucess" onClick={register} disabled={loading} > {loading ? "Cadastrando..." : "Cadastrar"} </button>
       </form>
       )
@@ -162,12 +219,26 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
       {isLogin && (
       <form className="login">
-        <label>
-          Digite Seu Email: <input type="email" name="Email" placeholder="Digite Seu Email" onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Digite Sua Senha: <input type="password"  name="Senha" placeholder="Digite Sua Senha" onChange={(e) => setUser({...user, password: e.target.value}) } /><br/>
-        </label>
+        
+      <Input 
+      label= "Digite seu Email"
+      type="email" 
+      placeholder="Digite Seu Email" 
+      onChange={setUser} 
+      objeto={user}
+      campo="email"
+      /><br/>
+       
+     
+      <Input
+      label= "Digite Sua Senha"
+      type="password" 
+      placeholder="Digite Sua Senha" 
+      onChange={setUser} 
+      objeto={user}
+      campo="password"
+      /><br/>
+        
         <button className="buttonSucess" type="submit" onClick={logar} disabled={loading} > {loading ? "Entrando..." : "Login" } </button>
       </form>
       )}
