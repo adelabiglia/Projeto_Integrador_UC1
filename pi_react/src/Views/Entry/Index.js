@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { replace, useNavigate } from 'react-router-dom';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Button from 'react-bootstrap/Button';
+import { Input } from '../../Components/Input';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
@@ -74,20 +75,20 @@ function Home() { //Aqui é JavaScript
 
     <div className="screen">
       <form onSubmit={(e) => e.preventDefault()}>
-      <input type="date" placeholder="Data" onChange={(e) => setEntry ({...entry, date: (e.target.value)})} />
-      <input type="text" placeholder="Descrição" onChange={(e) => setEntry ({...entry, description: (e.target.value)})} />
-      <input type="number" placeholder="Valor" onChange={(e) => setEntry ({...entry, value: (e.target.value)})} />
-      <input type="text" placeholder="Essa é uma chave de Categoria" onChange={(e) => setEntry ({...entry, category_id: (e.target.value)})} />
+      <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="Data" />
+      <Input type="text" placeholder="Descrição" onChange={setEntry} objeto={entry} campo="description"/>
+      <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="Valeu" />
+      <Input type="text" placeholder="Essa é uma chave de Categoria" onChange={setEntry} objeto={setEntry} campo="category_id" />
 
 
       <button onClick={createEntry} > Salvar </button>
       </form>
 
       <div className='pesquisar'> 
-      <input type='date' placeholder='Data' onChange={(e) => setEntry ({...entry, date: e.target.value})} />
+      <Input type='date' placeholder='Data' onChange={setEntry} objeto={entry} campo="Data" />
       <button onClick={()=> readEntries(["date",entry.date])} > Buscar Datas </button>
       <br/>
-      <input type='text' placeholder='Descrição' onChange={(e) => setEntry ({...entry, description: e.target.value})}/>
+      <Input type='text' placeholder='Descrição' onChange={setEntry} objeto={entry} campo="description"/>
       <button onClick={()=> readEntries(["description",entry.description])} > Buscar Descrição </button> 
       <br/>
       <button onClick={()=> readEntries()} > Limpar </button>
