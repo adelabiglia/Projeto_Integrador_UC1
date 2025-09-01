@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate, useParams } from 'react-router-dom';
+import { Input } from '../../Components/input';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -104,28 +105,76 @@ function Auth() { //Aqui é JavaScript
   
      
       <form className="register" onSubmit={(e) => e.preventDefault()}>
-        <label>
-          Nome: <br/><input type="text" name="Nome" value={user.name} placeholder="Digite Seu Nome" onChange={(e) => setUser({...user, name: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Data de Nascimento: <br/><input type="text" name="Data de Nascimento" value={user.birth} placeholder="Digite Sua Data de Nascimento" onChange={(e) => setUser({...user, birth: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Endereço: <br/><input type="text" name="Endereço" placeholder="Digite Seu Endereço" value={user.address} onChange={(e) => setUser({...user, address: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Numero: <br/><input type="text" name="Numero" placeholder="Digite o Número da Sua Residência " value={user.number} onChange={(e) => setUser({...user, number: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Bairro: <br/><input type="text" name="Bairro" placeholder="Digite Seu Bairro" value={user.neighborhood} onChange={(e) => setUser({...user, neighborhood: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Cidade: <br/><input type="text" name="Cidade" placeholder="Digite Sua Cidade" value={user.city} onChange={(e) => setUser({...user, city: e.target.value}) } /><br/>
-        </label>
-        <label>
-          Email: <br/><input type="text" name="Email" placeholder="Digite seu Email" value={user.email} onChange={(e) => setUser({...user, email: e.target.value}) } /><br/>
-        </label>
+        
+      <Input 
+        label= "Nome"
+        type="text" 
+        placeholder="Digite Seu Nome"
+        onChange={setUser} 
+        objeto={user}
+        campo="name"
+        /><br/>
+        
+        
+         <Input
+         label= "Data de Nascimento"
+         type="text"
+         placeholder="Digite Sua Data de Nascimento" 
+         onChange={setUser}
+         objeto={user}
+         campo="birth"
+         /><br/>
+        
+        
+        <Input 
+        label= "Endereço"
+        type="text" 
+        placeholder="Digite Seu Endereço" 
+        onChange={ setUser } 
+        objeto={user}
+        campo="address"
+        /><br/>
        
+        
+        <Input 
+        label= "Número"
+        type="text"  
+        placeholder="Digite o Número da Sua Residência " 
+        onChange={ setUser } 
+        objeto={user}
+        campo="number"
+        /><br/>
+       
+        
+        <Input 
+        label= "Bairro"
+        type="text" 
+        placeholder="Digite Seu Bairro"
+        onChange={setUser} 
+        objeto={user}
+        campo="neighborhood"
+        /><br/>
+      
+       
+        <Input 
+        label= "Cidade"
+        type="text"  
+        placeholder="Digite Sua Cidade" 
+        onChange={ setUser } 
+        objeto={user}
+        campo="city"
+        /><br/>
+        
+        
+        <Input 
+        label= "Email"
+        type="text"  
+        placeholder="Digite seu Email" 
+        onChange={setUser}
+        objeto={user}
+        campo="email"  
+        /><br/>
+      
         
         <button className="buttonSucess" onClick={updateProfile} disabled={loading} > {loading ? "Salvando..." : "Salvar"} </button>
 
