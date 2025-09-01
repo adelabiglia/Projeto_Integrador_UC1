@@ -1,32 +1,23 @@
 function Input({
     type,
     placeholder,
-    onChange,
+    onchange,
     className,
     label,
-    objeto, 
+    objeto,
     campo
-    }) {
-    return (
+}){
+
+    
+    return(
         <>
-            { label &&
-                (
-             <label>{label} :</label>
+            {label && (
+                <label> {label} :</label>
             )}
 
-            <input 
-            
-            type={type}
-            placeholder={placeholder}
-            onChange={(e) => onChange({...objeto, [campo]: e.target.value})}
-            className={className}
-            
-            
-            
-            />
-                
+            <input type={type} placeholder={placeholder} className={className} onchange={(e) => onchange({... objeto, [campo]: e.value})}/>
         </>
-    );
+    )
 }
 
-export {Input};
+export {Input}
