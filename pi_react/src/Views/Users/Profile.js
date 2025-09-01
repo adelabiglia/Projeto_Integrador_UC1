@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate, useParams } from 'react-router-dom';
-import { Input } from '../../Components/input';
+import { Input } from '../../Components/Input';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
