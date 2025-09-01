@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'; //useState ele retorna para gente u
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import {Input} from '../../Components/Input';  
 
 
 
@@ -69,9 +70,9 @@ export default function Categories(){
     
     <form onSubmit={(e) => e.preventDefault()}>
 
-      <input type="text" placeholder='Digite seu nome' onChange={(e) => setCategorie({...categorie, name: e.target.value})}/>     
-      <input type="text" placeholder='Digite sua meta' onChange={(e) => setCategorie({...categorie, meta: e.target.value})}/>    
-      <input type="text" placeholder='http://exemple.com' onChange={(e) => setCategorie({...categorie, image: e.target.value})}/>  
+      <Input type="text" placeholder='Digite seu nome' onChange={setCategorie} objeto={categorie} campo='name'/>     
+      <Input type="text" placeholder='Digite sua meta' onChange={setCategorie} objeto={categorie} campo='meta'/> 
+      <Input type="text" placeholder='http://exemple.com' onChange={setCategorie} objeto={categorie} campo='image'/> 
 
       <button onClick={createCategorie}> Salvar </button>  
 
