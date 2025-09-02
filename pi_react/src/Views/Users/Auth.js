@@ -132,7 +132,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       <br/><br/>
   
       {!isLogin && (
-      <Form func="register" >
+      <Form func={register} >
         
         <Input 
         label= "Nome"
@@ -218,7 +218,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       }
 
       {isLogin && (
-      <Form func="login">
+      <Form func={logar} >
         
       <Input 
       label= "Digite seu Email"
