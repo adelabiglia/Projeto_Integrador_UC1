@@ -44,6 +44,7 @@ function Home() { //Aqui é JavaScript
     .insert({...entry, user_id: uid});
     //.select();
         
+    readEntries();
   }
 
   async function readEntries(filtro) {
@@ -69,23 +70,25 @@ function Home() { //Aqui é JavaScript
       .from('entries')
       .delete()
       .eq('id', id)  
+
+      readEntries(); 
   }
   
   return(/* aqui é html */
 
     <div className="screen">
       <form onSubmit={(e) => e.preventDefault()}>
-      <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="Data" />
+      <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="date" />
       <Input type="text" placeholder="Descrição" onChange={setEntry} objeto={entry} campo="description"/>
-      <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="Valeu" />
-      <Input type="text" placeholder="Essa é uma chave de Categoria" onChange={setEntry} objeto={setEntry} campo="category_id" />
+      <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="value" />
+      <Input type="text" placeholder="Essa é uma chave de Categoria" onChange={setEntry} objeto={entry} campo="category_id" />
 
 
       <button onClick={createEntry} > Salvar </button>
       </form>
 
       <div className='pesquisar'> 
-      <Input type='date' placeholder='Data' onChange={setEntry} objeto={entry} campo="Data" />
+      <Input type='date' placeholder='Data' onChange={setEntry} objeto={entry} campo="date" />
       <button onClick={()=> readEntries(["date",entry.date])} > Buscar Datas </button>
       <br/>
       <Input type='text' placeholder='Descrição' onChange={setEntry} objeto={entry} campo="description"/>
