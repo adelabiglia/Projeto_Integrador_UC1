@@ -3,11 +3,11 @@ function Input({
     type,
     placeholder,
     onChange,
-    className,
     label,
     objeto, 
     campo
     }) {
+
     return (
         <>
             { label &&
@@ -28,6 +28,7 @@ function Input({
                 
         </>
     );
+
 }
 
 export {Input};
