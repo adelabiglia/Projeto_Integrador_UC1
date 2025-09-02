@@ -3,6 +3,7 @@ import { useState } from 'react'; //useState ele retorna para gente um par varia
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
 import { Input } from '../../Components/Input';
+import { Form } from '../../Components/Form';
 
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
@@ -131,7 +132,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       <br/><br/>
   
       {!isLogin && (
-      <form className="register" onSubmit={(e) => e.preventDefault()}>
+      <Form func="register" >
         
         <Input 
         label= "Nome"
@@ -212,13 +213,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
         campo="password"
         /><br/>
       
-        <button className="buttonSucess" onClick={register} disabled={loading} > {loading ? "Cadastrando..." : "Cadastrar"} </button>
-      </form>
+      </Form>
       )
       }
 
       {isLogin && (
-      <form className="login">
+      <Form func="login">
         
       <Input 
       label= "Digite seu Email"
@@ -239,8 +239,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       campo="password"
       /><br/>
         
-        <button className="buttonSucess" type="submit" onClick={logar} disabled={loading} > {loading ? "Entrando..." : "Login" } </button>
-      </form>
+      </Form>
       )}
       
       </div>
