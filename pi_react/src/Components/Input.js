@@ -3,6 +3,7 @@ function Input({
     type,
     placeholder,
     onChange,
+    className,
     label,
     objeto, 
     campo
