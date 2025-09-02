@@ -14,6 +14,7 @@ import Profile from './Views/Users/Profile';
 
 
 
+
 function PrivateSessioon(){
   const hasSession = !! localStorage.getItem('supaSession');
   return hasSession ? <Outlet/> : <Navigate to="/login" replace />

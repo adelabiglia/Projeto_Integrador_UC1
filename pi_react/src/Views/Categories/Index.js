@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import {Input} from '../../Components/Input';  
+import {Form} from '../../Components/Form';
 
 
 
@@ -68,15 +69,15 @@ export default function Categories(){
 
     <div className="screen"> 
     
-    <form onSubmit={(e) => e.preventDefault()}>
+    <Form func ={createCategorie} title="Cadastrar Categoria">
 
       <Input type="text" placeholder='Digite seu nome' onChange={setCategorie} objeto={categorie} campo='name'/>     
       <Input type="text" placeholder='Digite sua meta' onChange={setCategorie} objeto={categorie} campo='meta'/> 
-      <Input type="text" placeholder='http://exemple.com' onChange={setCategorie} objeto={categorie} campo='image'/> 
+      <Input type="text" placeholder='http://exemple.com' onChange={setCategorie} objeto={categorie} campo='url'/> 
+      
+ 
 
-      <button onClick={createCategorie}> Salvar </button>  
-
-    </form>
+    </Form>
 
     <button onClick={readCategories}>Buscar</button>
     
