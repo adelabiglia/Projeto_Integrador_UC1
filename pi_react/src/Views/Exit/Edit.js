@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 //import './App.css';
 import { createClient } from "@supabase/supabase-js";
-import { replace, useNavigate } from 'react-router-dom';
+import { replace, useNavigate, useParams } from 'react-router-dom';
 import CloseButton from 'react-bootstrap/CloseButton'
 import Button from 'react-bootstrap/Button';
 import { Input } from '../../Components/Input';
@@ -12,6 +12,8 @@ const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Exit() { //Aqui é JavaScript 
+  const {id} = useParams();
+
   const nav = useNavigate();
   const [exit, setExit] = useState ({
     date:"",
@@ -21,48 +23,40 @@ function Exit() { //Aqui é JavaScript
     user_id: "",
   })  
 
-  const [exits, setExits] = useState ([])
-
   useEffect(()=>{
-    readExits()
+    showExits()
   }, [])
 
-  async function createExit(){
+  async function updateExit(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
 
       const uid = dU?.user?.id;
   
       if(!uid) nav('/login', {replace: true})
+
+        console.log(exit)
   
       const { data, error } = await supabase
       .from('exits')
-      .insert({... exit, user_id: uid});
-      //.select()
+      .update({...exit, user_id: uid})
+      .eq('id', id)
+      
+      nav('/exit', {replace: true})
   }
 
-  async function readExits(filtro) {
+  async function showExits() {
 
-    if(filtro && filtro[0] && filtro[1]){
+  
       let { data: dataExits, error } = await supabase
       .from('exits')
       .select('*')
-      .eq(filtro[0], filtro[1])
-      setExits(dataExits);
-    }else{
-      let { data: dataExits, error } = await supabase
-      .from('exits')
-      .select('*')
+      .eq('id', id)
+      .single()
 
-      setExits(dataExits);
-    }  
+      setExit(dataExits);
+    
     } 
 
-  async function delExit(id){
-    const { error } = await supabase
-      .from('exits')
-      .delete()
-      .eq('id', id)
-  }  
   
   return (
     <div className="screen">
@@ -72,55 +66,8 @@ function Exit() { //Aqui é JavaScript
         <Input type='number' placeholder='Valor' onChange={setExit} objeto={exit} campo='value'/>
         <Input type='text' placeholder='essa é chave da categoria' onChange={setExit} objeto={exit} campo='category_id'/>
 
-        <button onClick={createExit} > Salvar </button>
+        <button onClick={updateExit} > Salvar </button>
       </form>
-
-      <div className='pesquisar'> 
-      <Input type='date' placeholder='Data' onChange={setExit} objeto={exit} campo='date' />
-      <button onClick={()=> readExits(["date",exit.date])} > Buscar Datas </button>
-      <br/>
-      <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
-      <button onClick={()=> readExits(["description",exit.description])} > Buscar Descrição </button> 
-      <br/>
-      <button onClick={()=> readExits()} > Atualizar </button>
-      </div>
-
-      <div className='exitTable'>
-      <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
-        
-            
-            <tr>
-              <th>Data: </th>
-              <th>Descrição: </th>
-              <th>Valor: </th>
-              <th>Excluir </th>
-              <th>Editar </th>
-            </tr>
-            
-          
-      {exits.map(
-        e => (
-                      
-          <tr key={e.id}   >
-              <td>{e.date}</td>
-              <td>{e.description}</td>
-              <td>R$ {e.value}</td>
-              <td><Button variant="danger" onClick={()=> delExit(e.id)}>Excluir</Button></td>
-              <td><Button variant="warning" onClick={() => nav( `/exit/${e.id}`, {replace: true})}>Editar</Button></td>
-          </tr>
-            
-          
-          //<div className='cardExit' key={e.id}>
-          //<br/><br/>
-          //Data: {e.date}<br/>
-          //Descrição: {e.description}<br/>
-          //Valor: R${e.value}<br/>
-          //</div>}
-          
-        )    
-      )}
-      </table>
-      </div>
     </div>
   );
    
