@@ -8,7 +8,7 @@ import Panel from './Views/Users/Panel';
 import Categories from './Views/Categories/Index';
 import CategoriesShow from './Views/Categories/Show';
 import Exit from './Views/Exit/Index';
-import ExitShow from './Views/Exit/Show';
+import ExitShow from './Views/Exit/Edit';
 import Profile from './Views/Users/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

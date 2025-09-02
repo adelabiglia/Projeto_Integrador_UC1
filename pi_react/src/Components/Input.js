@@ -1,4 +1,5 @@
 function Input({
+
     type,
     placeholder,
     onChange,
@@ -15,7 +16,7 @@ function Input({
             )}
 
             <input 
-            
+            value={objeto[campo]}
             type={type}
             placeholder={placeholder}
             onChange={(e) => onChange({...objeto, [campo]: e.target.value})}
