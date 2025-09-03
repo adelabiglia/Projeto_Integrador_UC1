@@ -93,7 +93,7 @@ function Home() { //Aqui é JavaScript
       <Input type='text' placeholder='Descrição' onChange={setEntry} objeto={entry} campo="description"/>
       <button onClick={()=> readEntries(["description",entry.description])} > Buscar Descrição </button> 
       <br/>
-      <button onClick={()=> readEntries()} > Atualizar </button>
+  
 
       </div>
 
