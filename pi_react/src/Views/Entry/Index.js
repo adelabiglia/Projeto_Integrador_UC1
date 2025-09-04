@@ -78,7 +78,7 @@ function Home() { //Aqui é JavaScript
   return(/* aqui é html */
 
     <div className="screen">
-      <Form func ={createEntry} title="Salvar">
+      <Form func ={createEntry} title="Entradas">
       <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="date" />
       <Input type="text" placeholder="Descrição" onChange={setEntry} objeto={entry} campo="description"/>
       <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="value" />
