@@ -61,7 +61,7 @@ function Entry() { //Aqui é JavaScript
   
   return (
     <div className="screen">
-      <Form func ={updateEntry} title="Salvar">
+      <Form func ={updateEntry} title="Entradas">
         <Input type='date' placeholder='Data' onChange={setEntry} objeto={entry} campo='date' />
         <Input type='text' placeholder='Descrição' onChange={setEntry} objeto={entry} campo='description'/>
         <Input type='number' placeholder='Valor' onChange={setEntry} objeto={entry} campo='value'/>
