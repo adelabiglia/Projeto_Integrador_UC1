@@ -18,7 +18,7 @@ function Exit() { //Aqui é JavaScript
   const [exit, setExit] = useState ({
     date:"",
     description:"",
-    value:"",
+    value:"" ,
     category_id: "",
     user_id: "",
   }) 
@@ -60,7 +60,7 @@ function Exit() { //Aqui é JavaScript
       let { data: dataExits, error } = await supabase
       .from('exits')
       .select('*')
-      .eq(filtro[0], filtro[1])
+      .ilike(filtro[0], filtro[1])
       setExits(dataExits);
     }else{
       let { data: dataExits, error } = await supabase
@@ -85,7 +85,7 @@ function Exit() { //Aqui é JavaScript
         <Input type='date' placeholder='Data' onChange={setExit} objeto={exit} campo='date' />
         <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
         <Input type='number' placeholder='Valor' onChange={setExit} objeto={exit} campo='value'/>
-
+        
         <select value={exit.category_id} onChange={(e)=> setExit({...exit, category_id: e.target.value})} >
           {categorie.map(
             c => (
@@ -125,7 +125,7 @@ function Exit() { //Aqui é JavaScript
           <tr key={e.id}   >
               <td>{e.date}</td>
               <td>{e.description}</td>
-              <td>R$ {e.value}</td>
+              <td>R$ {(e.value).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
               <td><Button variant="danger" onClick={()=> delExit(e.id)}>Excluir</Button></td>
               <td><Button variant="warning" onClick={() => nav( `/exit/${e.id}`, {replace: true})}>Editar</Button></td>
           </tr>
