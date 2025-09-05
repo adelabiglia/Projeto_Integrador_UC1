@@ -1,26 +1,17 @@
-
-import { useEffect, useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela
+import { useEffect, useState } from 'react';
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Input } from '../../Components/Input';
-
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-function Auth() { //Aqui é JavaScript 
-
+function Auth() {
   const nav = useNavigate();
-
   const {id} = useParams();
-
-  const [isLogin, setIslogin] = useState(true);
-
   const [loading, setLoading] = useState(false);
-
   const [msg, setMsg] = useState("");
-
   const [user, setUser] = useState({
     name: "",
     birth:"",
@@ -30,161 +21,119 @@ function Auth() { //Aqui é JavaScript
     city:"",
     email:"",
     password:"",
-  })
+  });
 
   useEffect(()=>{
     readProfile()
-  }
-  , [])
+  }, [])
 
-
-  async function updateProfile(){
-        const{data: dU, error: eU} = await supabase.auth.getUser();
-  
-        const uid = dU?.user?.id;
-    
-        if(!uid) nav('/login', {replace: true})
-    
-        const { data, error } = await supabase
-        .from('users')
-        .update({... user, user_id: uid})
-        .eq('id', id);
-        //.select()
-    }
-  
-
-  
   async function readProfile() {
-
-    const{data: dU, error: eU} = await supabase.auth.getUser();
-
+    const{data: dU} = await supabase.auth.getUser();
     const uid = dU?.user?.id;
-
-    console.log(uid)
-
-      let { data: dataProfile, error } = await supabase
+    let { data: dataProfile } = await supabase
       .from('users')
       .select('*')
       .eq("user_id",uid)
       .single();
+    setUser(dataProfile);
+  }
 
-      console.log(dataProfile)
-
-      setUser(dataProfile);
-   
+  async function updateProfile() {
+    setLoading(true);
+    const { data: dU } = await supabase.auth.getUser();
+    const uid = dU?.user?.id;
+    if (!uid) return nav('/login', { replace: true });
+    const { error } = await supabase
+      .from('users')
+      .update({ ...user })
+      .eq('user_id', uid);
+    if (error) {
+      setMsg(`Erro ao atualizar: ${error.message}`);
+    } else {
+      setMsg("Perfil atualizado com sucesso!");
     }
+    setLoading(false);
+    setTimeout(() => setMsg(""), 4000);
+  }
 
-    async function updateProfile() {
-      const { data: dU, error: eU } = await supabase.auth.getUser();
-      const uid = dU?.user?.id;
-    
-      if (!uid) return nav('/login', { replace: true });
-    
-      const { error } = await supabase
-        .from('users')
-        .update({ ...user })
-        .eq('user_id', uid);
-    
-      if (error) {
-        setMsg(`Erro ao atualizar: ${error.message}`);
-      } else {
-        setMsg("Perfil atualizado com sucesso!");
-      }
-    
-      setTimeout(() => setMsg(""), 4000);
-    }
-    
-
-  
-  return(/* aqui é html */
-    <div className="Screen">
-      <div className="card">
-     
-
-      <br/><br/>
-  
-     
-      <form className="register" onSubmit={(e) => e.preventDefault()}>
-        
-      <Input 
-        label= "Nome"
-        type="text" 
-        placeholder="Digite Seu Nome"
-        onChange={setUser} 
-        objeto={user}
-        campo="name"
-        /><br/>
-        
-        
-         <Input
-         label= "Data de Nascimento"
-         type="text"
-         placeholder="Digite Sua Data de Nascimento" 
-         onChange={setUser}
-         objeto={user}
-         campo="birth"
-         /><br/>
-        
-        
-        <Input 
-        label= "Endereço"
-        type="text" 
-        placeholder="Digite Seu Endereço" 
-        onChange={ setUser } 
-        objeto={user}
-        campo="address"
-        /><br/>
-       
-        
-        <Input 
-        label= "Número"
-        type="text"  
-        placeholder="Digite o Número da Sua Residência " 
-        onChange={ setUser } 
-        objeto={user}
-        campo="number"
-        /><br/>
-       
-        
-        <Input 
-        label= "Bairro"
-        type="text" 
-        placeholder="Digite Seu Bairro"
-        onChange={setUser} 
-        objeto={user}
-        campo="neighborhood"
-        /><br/>
-      
-       
-        <Input 
-        label= "Cidade"
-        type="text"  
-        placeholder="Digite Sua Cidade" 
-        onChange={ setUser } 
-        objeto={user}
-        campo="city"
-        /><br/>
-        
-        
-        <Input 
-        label= "Email"
-        type="text"  
-        placeholder="Digite seu Email" 
-        onChange={setUser}
-        objeto={user}
-        campo="email"  
-        /><br/>
-      
-        
-        <button className="buttonSucess" onClick={updateProfile} disabled={loading} > {loading ? "Salvando..." : "Salvar"} </button>
-
-      </form>
-   
+  return (
+    <div className="profile-bg">
+      <div className="profile-container">
+        <img
+          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'Usuário')}&background=869dcc&color=fff&size=128`}
+          alt="Avatar"
+          className="profile-avatar"
+        />
+        <h2 className="profile-title">Meu Perfil</h2>
+        <form className="profile-form" onSubmit={e => e.preventDefault()}>
+          <Input 
+            label="Nome"
+            type="text"
+            placeholder="Digite Seu Nome"
+            onChange={setUser}
+            objeto={user}
+            campo="name"
+          />
+          <Input
+            label="Data de Nascimento"
+            type="text"
+            placeholder="Digite Sua Data de Nascimento"
+            onChange={setUser}
+            objeto={user}
+            campo="birth"
+          />
+          <Input
+            label="Endereço"
+            type="text"
+            placeholder="Digite Seu Endereço"
+            onChange={setUser}
+            objeto={user}
+            campo="address"
+          />
+          <Input
+            label="Número"
+            type="text"
+            placeholder="Digite o Número da Sua Residência"
+            onChange={setUser}
+            objeto={user}
+            campo="number"
+          />
+          <Input
+            label="Bairro"
+            type="text"
+            placeholder="Digite Seu Bairro"
+            onChange={setUser}
+            objeto={user}
+            campo="neighborhood"
+          />
+          <Input
+            label="Cidade"
+            type="text"
+            placeholder="Digite Sua Cidade"
+            onChange={setUser}
+            objeto={user}
+            campo="city"
+          />
+          <Input
+            label="Email"
+            type="text"
+            placeholder="Digite seu Email"
+            onChange={setUser}
+            objeto={user}
+            campo="email"
+          />
+          <button
+            className="profile-save-btn"
+            onClick={updateProfile}
+            disabled={loading}
+          >
+            {loading ? "Salvando..." : "Salvar"}
+          </button>
+        </form>
+        {msg && (<div className='toast'>{msg}</div>)}
       </div>
-
-      {msg && (<div className='toast'>{msg} </div>)}     
     </div>
-  ); 
+  );
 }
 
 export default Auth;
