@@ -20,7 +20,7 @@ function Home() { //Aqui é JavaScript
     description: "",
     value: "",
     user_id: "",
-    category_id: ""
+    user_id: "",
 
   })
 
@@ -57,7 +57,7 @@ function Home() { //Aqui é JavaScript
       let { data: dataEntries, error } = await supabase
       .from('entries')
       .select('*')
-      .eq(filtro[0], filtro[1])
+      .ilike(filtro[0], filtro[1])
       setEntries(dataEntries);
     }else{
       let { data: dataEntries, error } = await supabase
@@ -96,7 +96,7 @@ function Home() { //Aqui é JavaScript
       <Input type="text" placeholder="Descrição" onChange={setEntry} objeto={entry} campo="description"/>
       <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="value" />
 
-      <select value={entry.category_id} onChange={(e) => setCategorie({
+      <select value={entry.category_id} onChange={(e) => setEntry({
         ...entry, category_id: e.target.value
        })} >
         {categorie.map(
@@ -133,7 +133,7 @@ function Home() { //Aqui é JavaScript
         <tr key={e.id} >
           <td>{e.date}</td>
           <td>{e.description}</td>
-          <td>R$ {e.value}</td>
+          <td>R$ {Number(e.value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
           <td> <Button variant="danger" onClick={() => delEntry(e.id)}>Excluir</Button> </td>
           <td> <Button variant="warning" onClick={() => nav( `/entry/${e.id}` , {replace: true })} >Editar</Button> </td>
         </tr>
