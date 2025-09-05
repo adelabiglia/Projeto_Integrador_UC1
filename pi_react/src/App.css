@@ -271,3 +271,88 @@ nav a:hover {
    right: 80px;
    
 }
+
+/* ...existing code... */
+
+.profile-bg {
+  min-height: 100vh;
+  background: #36523e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+/* ...existing code... */
+
+.profile-container {
+  background: #fff;
+  max-width: 280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 90px 16px 20px 6px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #226b49;
+  margin-bottom: 8px;
+}
+
+.profile-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  color: #2a473a;
+  font-weight: bold;
+}
+
+.profile-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center; /* centraliza os itens, inclusive o botão */
+}
+
+.profile-save-btn {
+  margin-top: 12px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #456d52;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+@keyframes clickEffect {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #24bb4d;
+  }
+  50% {
+    transform: scale(0.93);
+    box-shadow: 0 0 8px 4px #24bb4d;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #24bb4d;
+  }
+}
+
+.profile-save-btn.clicked {
+  animation: clickEffect 0.25s;
+}
+
+/* ...existing code... */
