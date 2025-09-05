@@ -27,7 +27,7 @@ function Form({
                 {children}
 
 
-                <Button onClick={() => send()} disabled={loading}>
+                <Button className="input-salvar" onClick={() => send()} disabled={loading}>
                      {loading ? (
                         <Spinner animation="border" role="status">
                                 <span className="visually-hidden">

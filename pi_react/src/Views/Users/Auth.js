@@ -1,10 +1,9 @@
-
 import { useState } from 'react'; //useState ele retorna para gente um par variavel e funçao que quando alterado o dom mostra na tela 
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from 'react-router-dom';
 import { Input } from '../../Components/Input';
 import { Form } from '../../Components/Form';
-
+import './Auth.css';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
@@ -122,9 +121,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
   }
   
   return(/* aqui é html */
-    <div className="Screen">
-      <div className="card">
-      <button className='buttonSucess' onClick={() => setIslogin(!isLogin)} >
+    <div className="auth-container">
+      <div className="auth-card">
+      <button className='buttonSucess auth-button' onClick={() => setIslogin(!isLogin)} >
         {isLogin && ("Cadastrar-se")}
         {!isLogin && ("Voltar para o Login")}
       </button>
@@ -132,7 +131,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       <br/><br/>
   
       {!isLogin && (
-      <Form func={register} >
+      <Form func={register} className="auth-input"> 
         
         <Input 
         label= "Nome"
@@ -244,7 +243,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
       
       </div>
 
-      {msg && (<div className='toast'>{msg} </div>)}     
+      {msg && (<div className='auth-toast'>{msg} </div>)}     
     </div>
   ); 
 }
