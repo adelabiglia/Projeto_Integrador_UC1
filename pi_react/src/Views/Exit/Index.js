@@ -14,18 +14,20 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Exit() { //Aqui é JavaScript 
   const nav = useNavigate();
+  const [categorie, setCategorie] = useState([]);
   const [exit, setExit] = useState ({
     date:"",
     description:"",
     value:"",
     category_id: "",
     user_id: "",
-  })  
+  }) 
 
   const [exits, setExits] = useState ([])
 
   useEffect(()=>{
     readExits()
+    readCategories()
   }, [])
 
   async function createExit(){
@@ -41,8 +43,17 @@ function Exit() { //Aqui é JavaScript
       //.select()
       readExits();
   }
-  
 
+  async function readCategories(){
+
+    let { data: dataCategories, error } = await supabase
+    .from('categories')
+    .select('*');
+ 
+    setCategorie(dataCategories);
+
+  }
+  
   async function readExits(filtro) {
 
     if(filtro && filtro[0] && filtro[1]){
@@ -74,9 +85,15 @@ function Exit() { //Aqui é JavaScript
         <Input type='date' placeholder='Data' onChange={setExit} objeto={exit} campo='date' />
         <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
         <Input type='number' placeholder='Valor' onChange={setExit} objeto={exit} campo='value'/>
-        <Input type='text' placeholder='essa é chave da categoria' onChange={setExit} objeto={exit} campo='category_id'/>
 
-        
+        <select value={exit.category_id} onChange={(e)=> setExit({...exit, category_id: e.target.value})} >
+          {categorie.map(
+            c => (
+              <option value={c.id}>{c.name}</option>
+            )
+          )}
+        </select>
+              
       </Form>
 
       <div className='pesquisar'> 
