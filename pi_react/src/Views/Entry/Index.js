@@ -13,6 +13,7 @@ const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Home() { //Aqui é JavaScript 
+  const [categorie, setCategorie] = useState([]);
   const nav = useNavigate();
   const [entry, setEntry] = useState({
     date: "",
@@ -27,6 +28,7 @@ function Home() { //Aqui é JavaScript
 
   useEffect(()=>{
     readEntries()
+    readCategories();
   }, [])
 
   async function createEntry(){
@@ -46,6 +48,7 @@ function Home() { //Aqui é JavaScript
     //.select();
         
     readEntries();
+    
   }
 
   async function readEntries(filtro) {
@@ -74,6 +77,16 @@ function Home() { //Aqui é JavaScript
 
       readEntries(); 
   }
+
+  async function readCategories(){
+
+    let { data: dataCategories, error } = await supabase
+    .from('categories')
+    .select('*');
+    
+    setCategorie(dataCategories);
+
+  }
   
   return(/* aqui é html */
 
@@ -82,7 +95,14 @@ function Home() { //Aqui é JavaScript
       <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="date" />
       <Input type="text" placeholder="Descrição" onChange={setEntry} objeto={entry} campo="description"/>
       <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="value" />
-      <Input type="text" placeholder="Essa é uma chave de Categoria" onChange={setEntry} objeto={entry} campo="category_id" />
+
+      <select value={entry.category_id} onChange={(e) => setCategorie({
+        ...entry, category_id: e.target.value
+       })} >
+        {categorie.map(
+          c => (< option value={c.id}> {c.name}</option>))
+          
+        } </select>
 
       </Form>
 
