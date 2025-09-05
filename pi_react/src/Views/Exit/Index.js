@@ -18,7 +18,7 @@ function Exit() { //Aqui é JavaScript
   const [exit, setExit] = useState ({
     date:"",
     description:"",
-    value:"",
+    value:"" ,
     category_id: "",
     user_id: "",
   }) 
@@ -60,7 +60,7 @@ function Exit() { //Aqui é JavaScript
       let { data: dataExits, error } = await supabase
       .from('exits')
       .select('*')
-      .eq(filtro[0], filtro[1])
+      .ilike(filtro[0], filtro[1])
       setExits(dataExits);
     }else{
       let { data: dataExits, error } = await supabase
