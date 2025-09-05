@@ -14,18 +14,20 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Exit() { //Aqui é JavaScript 
   const nav = useNavigate();
+  const [categorie, setCategorie] = useState([]);
   const [exit, setExit] = useState ({
     date:"",
     description:"",
-    value:"",
+    value:"" ,
     category_id: "",
     user_id: "",
-  })  
+  }) 
 
   const [exits, setExits] = useState ([])
 
   useEffect(()=>{
     readExits()
+    readCategories()
   }, [])
 
   async function createExit(){
@@ -41,15 +43,24 @@ function Exit() { //Aqui é JavaScript
       //.select()
       readExits();
   }
-  
 
+  async function readCategories(){
+
+    let { data: dataCategories, error } = await supabase
+    .from('categories')
+    .select('*');
+ 
+    setCategorie(dataCategories);
+
+  }
+  
   async function readExits(filtro) {
 
     if(filtro && filtro[0] && filtro[1]){
       let { data: dataExits, error } = await supabase
       .from('exits')
       .select('*')
-      .eq(filtro[0], filtro[1])
+      .ilike(filtro[0], filtro[1])
       setExits(dataExits);
     }else{
       let { data: dataExits, error } = await supabase
@@ -74,9 +85,15 @@ function Exit() { //Aqui é JavaScript
         <Input type='date' placeholder='Data' onChange={setExit} objeto={exit} campo='date' />
         <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
         <Input type='number' placeholder='Valor' onChange={setExit} objeto={exit} campo='value'/>
-        <Input type='text' placeholder='essa é chave da categoria' onChange={setExit} objeto={exit} campo='category_id'/>
-
         
+        <select value={exit.category_id} onChange={(e)=> setExit({...exit, category_id: e.target.value})} >
+          {categorie.map(
+            c => (
+              <option value={c.id}>{c.name}</option>
+            )
+          )}
+        </select>
+              
       </Form>
 
       <div className='pesquisar'> 
@@ -86,7 +103,7 @@ function Exit() { //Aqui é JavaScript
       <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
       <button onClick={()=> readExits(["description",exit.description])} > Buscar Descrição </button> 
       <br/>
-      <button onClick={()=> readExits()} > Atualizar </button>
+
       </div>
 
       <div className='exitTable'>
@@ -108,7 +125,7 @@ function Exit() { //Aqui é JavaScript
           <tr key={e.id}   >
               <td>{e.date}</td>
               <td>{e.description}</td>
-              <td>R$ {e.value}</td>
+              <td>R$ {(e.value).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
               <td><Button variant="danger" onClick={()=> delExit(e.id)}>Excluir</Button></td>
               <td><Button variant="warning" onClick={() => nav( `/exit/${e.id}`, {replace: true})}>Editar</Button></td>
           </tr>
