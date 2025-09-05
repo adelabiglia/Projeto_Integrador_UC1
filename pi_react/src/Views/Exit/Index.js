@@ -6,6 +6,7 @@ import { replace, useNavigate } from 'react-router-dom';
 import CloseButton from 'react-bootstrap/CloseButton'
 import Button from 'react-bootstrap/Button';
 import { Input } from '../../Components/Input';
+import { Form } from '../../Components/Form';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
@@ -38,7 +39,9 @@ function Exit() { //Aqui é JavaScript
       .from('exits')
       .insert({... exit, user_id: uid});
       //.select()
+      readExits();
   }
+  
 
   async function readExits(filtro) {
 
@@ -62,18 +65,19 @@ function Exit() { //Aqui é JavaScript
       .from('exits')
       .delete()
       .eq('id', id)
+      readExits();
   }  
   
   return (
     <div className="screen">
-      <form onSubmit={(e)=> e.preventDefault()}>
+      <Form func ={createExit} title="Saídas">
         <Input type='date' placeholder='Data' onChange={setExit} objeto={exit} campo='date' />
         <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
         <Input type='number' placeholder='Valor' onChange={setExit} objeto={exit} campo='value'/>
         <Input type='text' placeholder='essa é chave da categoria' onChange={setExit} objeto={exit} campo='category_id'/>
 
-        <button onClick={createExit} > Salvar </button>
-      </form>
+        
+      </Form>
 
       <div className='pesquisar'> 
       <Input type='date' placeholder='Data' onChange={setExit} objeto={exit} campo='date' />
