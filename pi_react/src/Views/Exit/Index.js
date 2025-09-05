@@ -103,7 +103,7 @@ function Exit() { //Aqui é JavaScript
       <Input type='text' placeholder='Descrição' onChange={setExit} objeto={exit} campo='description'/>
       <button onClick={()=> readExits(["description",exit.description])} > Buscar Descrição </button> 
       <br/>
-      <button onClick={()=> readExits()} > Atualizar </button>
+
       </div>
 
       <div className='exitTable'>
