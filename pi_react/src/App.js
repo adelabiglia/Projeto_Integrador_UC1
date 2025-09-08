@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 're
 import Entry from './Views/Entry/Index';
 import EntryShow from './Views/Entry/Edit';
 import Panel from './Views/Users/Panel';
+import Transactions from './Views/Transactions/Index';
 import Categories from './Views/Categories/Index';
 import CategoriesShow from './Views/Categories/Show';
 import Exit from './Views/Exit/Index';
@@ -29,7 +30,8 @@ function App() { //Aqui é JavaScript
         <nav>
           {hasSession ? (
             <>
-              <Link to="/entry">Inicio</Link>
+              <Link to="/home">Inicio</Link>
+              <Link to="/entry">Entradas</Link>
               <Link to="/categories">Categorias</Link>
               <Link to="/panel">Painel</Link>
               <Link to="/exit">Sair</Link>
@@ -51,6 +53,7 @@ function App() { //Aqui é JavaScript
           <Route element={<PrivateSessioon/>}> 
           {/* Route = Rotas Logado*/}
            
+            <Route path='/home' element={<Transactions/>} />
             <Route path='/categories' element={<Categories/>} />
             <Route path='/categories/:id' element={<CategoriesShow/>} />
             <Route path='/panel' element={<Panel/>} /> 
