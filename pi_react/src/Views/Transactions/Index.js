@@ -99,7 +99,7 @@ function Transactions() { //Aqui é JavaScript
 
     <div className="screen">
 
-    <p>asudhiuashdahih</p>
+    
 
       <Form func ={createEntry} title="Entradas">
       <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="date" />
