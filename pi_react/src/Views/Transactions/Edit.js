@@ -7,12 +7,13 @@ import CloseButton from 'react-bootstrap/CloseButton'
 import Button from 'react-bootstrap/Button';
 import { Input } from '../../Components/Input';
 import { Form } from '../../Components/Form';
+import Transactions from './Index';
 
 const supabaseUrl="https://kvuxqtwfmqnookboncos.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g"
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-function Entry() { //Aqui é JavaScript 
+function Transactions() { //Aqui é JavaScript 
   const {id} = useParams();
 
   const nav = useNavigate();
@@ -25,10 +26,10 @@ function Entry() { //Aqui é JavaScript
   })  
 
   useEffect(()=>{
-    showEntries()
+    showTransactions()
   }, [])
 
-  async function updateEntry(){
+  async function updateTransactions(){
       const{data: dU, error: eU} = await supabase.auth.getUser();
 
       const uid = dU?.user?.id;
@@ -45,7 +46,7 @@ function Entry() { //Aqui é JavaScript
       nav('/entry', {replace: true})
   }
 
-  async function showEntries() {
+  async function showTransactions() {
 
   
       let { data: dataEntries, error } = await supabase
@@ -72,4 +73,4 @@ function Entry() { //Aqui é JavaScript
    
 }
 
-export default Entry;
+export default Transactions;
