@@ -1,11 +1,27 @@
-# programadordesistema
-cd pi_react
-npx create-react-app .
+# Controle de Finanças Pessoal
 
-# para entrar na pasta pi_react
-cd pi_react
+Aplicação React para controle simples de finanças pessoais. Permite registrar entradas e saídas com descrição, visualizando o saldo total.
 
-# se nao tiver aparecendo a node modules falta
+## Funcionalidades
+
+- ✅ Registro de entradas e saídas
+- ✅ Saldo total atualizado
+- ✅ Armazenamento local (localStorage)
+- ✅ Design responsivo
+
+## Tecnologias
+
+- React
+- HTML/CSS
+- JavaScript
+- (Opcional: Tailwind ou Bootstrap)
+
+## Como rodar localmente
+
+```bash
+git clone https://github.com/adelabiglia/Projeto_Integrador_UC1.git
+cd Projeto_Integrador_UC1
 npm install
+npm start
 
 
