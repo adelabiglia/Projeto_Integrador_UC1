@@ -152,7 +152,7 @@ function Transactions() { //Aqui é JavaScript
           <td>{e.description}</td>
           <td>R$ {Number(e.value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
           <td> <Button variant="danger" onClick={() => delEntry(e)}>Excluir</Button> </td>
-          <td> <Button variant="warning" onClick={() => nav( `/entry/${e.id}` , {replace: true })} >Editar</Button> </td>
+          <td> <Button variant="warning" onClick={() => nav( e.category_entry == true ? `/entry/${e.id}` : `/exit/${e.id}` , {replace: true })} >Editar</Button> </td>
         </tr>
         )
       )}
