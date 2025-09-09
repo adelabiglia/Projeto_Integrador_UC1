@@ -11,9 +11,7 @@ import CategoriesShow from './Views/Categories/Show';
 import Exit from './Views/Exit/Index';
 import ExitShow from './Views/Exit/Edit';
 import Profile from './Views/Users/Profile';
-
-
-
+import Screen from './Views/Screen/Index';
 
 
 function PrivateSessioon(){
@@ -30,7 +28,8 @@ function App() { //Aqui é JavaScript
         <nav>
           {hasSession ? (
             <>
-              <Link to="/home">Inicio</Link>
+              <Link to="/screen">Inicio</Link>            
+              <Link to="/home">Lançamentos</Link>
               <Link to="/entry">Entradas</Link>
               <Link to="/categories">Categorias</Link>
               <Link to="/panel">Painel</Link>
@@ -53,6 +52,7 @@ function App() { //Aqui é JavaScript
           <Route element={<PrivateSessioon/>}> 
           {/* Route = Rotas Logado*/}
            
+            <Route path='/screen' element={<Screen/>} />
             <Route path='/home' element={<Transactions/>} />
             <Route path='/categories' element={<Categories/>} />
             <Route path='/categories/:id' element={<CategoriesShow/>} />
