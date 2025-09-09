@@ -41,7 +41,7 @@ export default function Categories(){
 
     const uid = dataUser?.user?.id
 
-    if(!uid) nav('/login', {replace:true})
+    if(!uid) nav('/categories', {replace:true})
 
 
     /*categorie = {...categorie, user_id: dataUser}*/
@@ -54,6 +54,32 @@ export default function Categories(){
 
   }
 
+
+
+
+  async function delCategorie(id) {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+  
+    if (userError || !userData?.user?.id) {
+      alert("Você precisa estar logado para deletar.");
+      nav('/login', { replace: true });
+      return;
+    }
+  
+    const { error } = await supabase
+      .from('categories')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', userData.user.id); // Garante que só deleta se for dono
+  
+    if (error) {
+      console.error("Erro ao deletar:", error.message);
+      alert("Erro ao deletar: " + error.message);
+    } else {
+      setCategories(prev => prev.filter(cat => cat.id !== id));
+    }
+  }
+  
 
   async function readCategories(){
 
@@ -71,15 +97,15 @@ export default function Categories(){
     
     <Form func ={createCategorie} title="Cadastrar Categoria">
 
-      <Input type="text" placeholder='Digite seu nome' onChange={setCategorie} objeto={categorie} campo='name'/>     
+      <Input type="text" placeholder='Digite a categoria' onChange={setCategorie} objeto={categorie} campo='name'/>     
       <Input type="text" placeholder='Digite sua meta' onChange={setCategorie} objeto={categorie} campo='meta'/> 
-      <Input type="text" placeholder='http://exemple.com' onChange={setCategorie} objeto={categorie} campo='url'/> 
+      <Input type="text" placeholder='http://exemple.com' onChange={setCategorie} objeto={categorie} campo='image'/> 
+ 
       
  
 
     </Form>
-
-    <button onClick={readCategories}>Buscar</button>
+    
     
     <div className='row'>
     {categories.map(
@@ -89,9 +115,10 @@ export default function Categories(){
           <div className='cardGame' key={c.id} >
            Nome: {c.name}
            <a url={c.url}></a>
-           <p>{c.meta}</p>
+           <p>{Number(c.meta).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+          
 
-           <td><Button variant="danger">Excluir</Button></td>
+           <td><Button variant="danger"onClick={() => delCategorie(c.id)}>Excluir</Button></td>
            <td><Button variant="warning" onClick={() => nav(`/categories/${c.id}`, {replace: true} )}>Editar</Button></td>
 
           </div>

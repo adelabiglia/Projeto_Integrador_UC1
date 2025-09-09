@@ -424,3 +424,22 @@ nav a:hover {
   background-color: #8e3838; /* Verde mais escuro */
   transform: scale(1.05);
 }
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* espaçamento entre os cards */
+  justify-content: flex-start;
+}
+
+.cardGame {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 16px;
+  width: calc(25% - 16px); /* 4 por linha considerando o gap */
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+
