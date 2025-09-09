@@ -31,7 +31,7 @@ function Transactions() { //Aqui é JavaScript
     readCategories();
   }, [])
 
-  async function createEntry(){
+  async function create(){
     const{data: dU, error: eU} = await supabase.auth.getUser();
 
     console.log(dU)
@@ -42,8 +42,10 @@ function Transactions() { //Aqui é JavaScript
 
     console.log({...entry, user_id: uid})
 
+    let tableName = entry.category_id == "32" ? "entries": "exits"
+
     const { data, error } = await supabase
-    .from('entries')
+    .from(tableName)
     .insert({...entry, user_id: uid});
     //.select();
         
@@ -76,11 +78,14 @@ function Transactions() { //Aqui é JavaScript
   }
   
 
-  async function delEntry(id){
+  async function delEntry(transaction){
+
+    let tableName = transaction.category_entry == true ? "entries" : "exits";
+
     const { error } = await supabase
-      .from('entries')
+      .from(tableName)
       .delete()
-      .eq('id', id)  
+      .eq('id', transaction.id)  
 
       readTransactions(); 
   }
@@ -101,7 +106,7 @@ function Transactions() { //Aqui é JavaScript
 
     
 
-      <Form func ={createEntry} title="Entradas">
+      <Form func ={create} title="Entradas">
       <Input type="date" placeholder="Data" onChange={setEntry} objeto={entry} campo="date" />
       <Input type="text" placeholder="Descrição" onChange={setEntry} objeto={entry} campo="description"/>
       <Input type="number" placeholder="Valor" onChange={setEntry} objeto={entry} campo="value" />
@@ -146,7 +151,7 @@ function Transactions() { //Aqui é JavaScript
           <td style={{ color: e.category_entry == true ? "green":"red"}} >{ e.category_entry == true ? "Entrada" : "Saída"}</td>
           <td>{e.description}</td>
           <td>R$ {Number(e.value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
-          <td> <Button variant="danger" onClick={() => delEntry(e.id)}>Excluir</Button> </td>
+          <td> <Button variant="danger" onClick={() => delEntry(e)}>Excluir</Button> </td>
           <td> <Button variant="warning" onClick={() => nav( `/entry/${e.id}` , {replace: true })} >Editar</Button> </td>
         </tr>
         )
