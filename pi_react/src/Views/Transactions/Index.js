@@ -135,13 +135,13 @@ function Transactions() { //Aqui é JavaScript
       <div className='exitTable'> 
       <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
 
-         <tr style={{fontSize: 25}}>
+         <tr style={{fontSize: 22}}>
             <th><i class="fa-solid fa-calendar-days"></i></th>
             <th style={{width: 100}} ><i class="fa-solid fa-money-bill-trend-up"></i> </th>
             <th><i class="fa-solid fa-align-right"></i> </th>
             <th><i class="fa-solid fa-dollar-sign"></i></th>
-            <th></th>
-            <th></th>
+            <th>Excluir</th>
+            <th>Editar</th>
           </tr>
 
       {entries.map(
