@@ -133,7 +133,7 @@ function Transactions() { //Aqui é JavaScript
       </div>
 
       <div className='exitTable'> 
-      <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
+      <table class="exitTable" border ="1" cellpadding="5" cellspacing="0" className='table table-striped table-hover'>
 
          <tr style={{fontSize: 25}}>
             <th><i class="fa-solid fa-calendar-days"></i></th>
@@ -146,7 +146,14 @@ function Transactions() { //Aqui é JavaScript
 
       {entries.map(
         e => (
-        <div>Nao tem nada</div>
+          <tr key={e.id} >
+            <td>{ e.date.split("-").reverse().join("/") }</td>
+            <td style={{ color: e.category_entry == true ? "green":"red"}} >{ e.category_entry == true ? <p><i class="fa-solid fa-caret-up"></i> Entrada</p> : <p><i class="fa-solid fa-caret-down"></i> Saída</p>}</td>
+            <td>{e.description}</td>
+            <td> <span style={{color: "GREY", fontSize: 12}}>R$</span> <strong> {Number(e.value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} </strong></td>
+            <td> <Button onClick={() => delEntry(e)} style={{color: "#dc3545", border: "1px solid #dc3545", backgroundColor: "transparent", fontSize: 22}}  ><i class="fa-solid fa-circle-xmark"></i></Button> </td>
+            <td> <Button onClick={() => nav( e.category_entry == true ? `/entry/${e.id}` : `/exit/${e.id}` , {replace: true })} style={{color: "#ffc107", border: "1px solid #ffc107", backgroundColor: "transparent", fontSize: 22}} ><i class="fa-solid fa-pen-to-square"></i></Button> </td>
+          </tr>
         )
       )}
 
