@@ -156,7 +156,6 @@ function Transactions() { //Aqui é JavaScript
         </tr>
         )
       )}
-
       
       </table>
       </div>
