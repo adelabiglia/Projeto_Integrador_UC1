@@ -135,24 +135,24 @@ function Transactions() { //Aqui é JavaScript
       <div className='exitTable'> 
       <table class="exitTable" border ="1" cellpadding="5" cellspacing="0">
 
-         <tr>
-            <th>Data: </th>
-            <th style={{width: 100}} >Tipo: </th>
-            <th>Descrição: </th>
-            <th>Valor: </th>
-            <th> Ações </th>
-            <th> Ações </th>
+         <tr style={{fontSize: 25}}>
+            <th><i class="fa-solid fa-calendar-days"></i></th>
+            <th style={{width: 100}} ><i class="fa-solid fa-money-bill-trend-up"></i> </th>
+            <th><i class="fa-solid fa-align-right"></i> </th>
+            <th><i class="fa-solid fa-dollar-sign"></i></th>
+            <th></th>
+            <th></th>
           </tr>
 
       {entries.map(
         e => (
         <tr key={e.id} >
-          <td>{e.date}</td>
-          <td style={{ color: e.category_entry == true ? "green":"red"}} >{ e.category_entry == true ? "Entrada" : "Saída"}</td>
+          <td>{ e.date.split("-").reverse().join("/") }</td>
+          <td style={{ color: e.category_entry == true ? "green":"red"}} >{ e.category_entry == true ? <p><i class="fa-solid fa-caret-up"></i> Entrada</p> : <p><i class="fa-solid fa-caret-down"></i> Saída</p>}</td>
           <td>{e.description}</td>
-          <td>R$ {Number(e.value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</td>
-          <td> <Button variant="danger" onClick={() => delEntry(e)}>Excluir</Button> </td>
-          <td> <Button variant="warning" onClick={() => nav( e.category_entry == true ? `/entry/${e.id}` : `/exit/${e.id}` , {replace: true })} >Editar</Button> </td>
+          <td> <span style={{color: "GREY", fontSize: 12}}>R$</span> <strong> {Number(e.value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} </strong></td>
+          <td> <Button onClick={() => delEntry(e)} style={{color: "#dc3545", border: "1px solid #dc3545", backgroundColor: "transparent", fontSize: 22}}  ><i class="fa-solid fa-circle-xmark"></i></Button> </td>
+          <td> <Button onClick={() => nav( e.category_entry == true ? `/entry/${e.id}` : `/exit/${e.id}` , {replace: true })} style={{color: "#ffc107", border: "1px solid #ffc107", backgroundColor: "transparent", fontSize: 22}} ><i class="fa-solid fa-pen-to-square"></i></Button> </td>
         </tr>
         )
       )}
