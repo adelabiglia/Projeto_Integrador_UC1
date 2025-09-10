@@ -8,6 +8,7 @@ const supabaseUrl = "https://kvuxqtwfmqnookboncos.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+
 function Screen() {
   const nav = useNavigate();
   const [categorie, setCategorie] = useState([]);
@@ -117,9 +118,9 @@ function Screen() {
           </thead>
           <tbody>
             <tr>
-              <td>{entriesTotal}</td>
-              <td>{exitsTotal}</td>
-              <td>{entriesTotal - exitsTotal}</td> {/* Calculando o saldo */}
+              <td>R$ {(entriesTotal).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
+              <td>R$ {(exitsTotal).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
+              <td>R$ {(entriesTotal - exitsTotal).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td> {/* Calculando o saldo */}
             </tr>
           </tbody>
         </table>
