@@ -1,11 +1,5 @@
 .App {
-  min-height: calc (100vh - 60px);
-  margin-top: 37px; 
-
-  display: flex;
   align-items: center;
-  justify-content: center;
-
   font-family: Arial, sans-serif;
 
   }

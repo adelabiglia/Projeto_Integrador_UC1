@@ -1,10 +1,10 @@
-body {
+.pres-body {
     background-image: url(https://lirp.cdn-website.com/9928f089/dms3rep/multi/opt/Planejamento+financeiro+pessoal-1920w.jpeg);
     background-size: cover;
-  }
+}
 
 /* Cabeçalho */
-.cabecalho {
+.pres-cabecalho {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,15 +14,15 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-  }
-  
-  .logo {
+}
+
+.pres-logo {
     font-size: 1.8em;
     font-weight: bold;
     margin: 0;
-  }
-  
-  .btn-cabecalho {
+}
+
+.pres-btn-cabecalho {
     background-color: white;
     color: #27ae60;
     padding: 10px 20px;
@@ -31,45 +31,36 @@ body {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .btn-cabecalho:hover {
+}
+
+.pres-btn-cabecalho:hover {
     background-color: #f1f1f1;
-  }
-  
-  /* Imagem de destaque */
-  .imagem-banner {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 0;
-    margin-bottom: 30px;
-  }
-  
-  /* Conteúdo principal */
-  .apresentacao-container {
+}
+
+/* Conteúdo principal */
+.pres-apresentacao-container {
     max-width: 1000px;
     margin: auto;
     padding: 40px 20px;
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
     color: #333;
-  }
-  
-  .apresentacao-container h2 {
+}
+
+.pres-apresentacao-container h2 {
     font-size: 2.2em;
     margin-bottom: 30px;
     color: #c4d3cb;
-  }
-  
-  .cards-container {
+}
+
+.pres-cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-  }
-  
-  .card {
+}
+
+.pres-card {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 12px;
@@ -77,20 +68,21 @@ body {
     width: 280px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
-  }
-  
-  .card:hover {
+}
+
+.pres-card:hover {
     transform: translateY(-5px);
-  }
-  
-  .card h3 {
+}
+
+.pres-card h3 {
     font-size: 1.4em;
     margin-bottom: 10px;
     color: #27ae60;
-  }
-  
-  .card p {
+}
+
+.pres-card p {
     font-size: 1em;
     line-height: 1.5;
-  }
+}
+
   
