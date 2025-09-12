@@ -5,10 +5,27 @@
   align-items: center;
   height: 100vh;
   background-color: #f4f4f4; /* Fundo cinza neutro */
+  background-image: url('https://static.vecteezy.com/ti/vetor-gratis/p2/1330312-trading-financial-business-chart-chart-background-gr%C3%A1tis-vetor.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: Arial, sans-serif;
 }
 
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* Overlay escuro para contraste */
+  z-index: 1;
+}
+
 .auth-card {
+  position: relative;
+  z-index: 2;
   background: #ffffff;
   padding: 40px 30px;
   border-radius: 12px;
@@ -21,7 +38,7 @@
 
 .auth-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .auth-title {
