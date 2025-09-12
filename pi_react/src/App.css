@@ -259,12 +259,12 @@ nav a:hover {
 .dropdown {
   position: absolute;
   right: 0;
-  top: 50px;
+  top: 80px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  padding: 10px;
+  padding: 10px;  
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -313,12 +313,11 @@ nav a:hover {
 }
 
 .profile-avatar {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #4caf50;
-  margin-bottom: 15px;
 }
 
 .profile-title {
