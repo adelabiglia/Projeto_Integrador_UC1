@@ -11,7 +11,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
  
 function Screen() {
   const nav = useNavigate();
-  const [categorie, setCategorie] = useState([]);
   const [exit, setExit] = useState({
     date: "",
     description: "",
@@ -19,50 +18,71 @@ function Screen() {
     category_id: "",
     user_id: "",
   });
-  const [exits, setExits] = useState([]);
-  const [entriesTotal, setEntriesTotal] = useState(0); // Para somar as entradas
-  const [exitsTotal, setExitsTotal] = useState(0); // Para somar as saídas
 
-  // pegar a data de inicio e fim
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
- 
+  // Resumo das transações
+  const [summary, setSummary] = useState([]);
+
+  // Pegar a data de inicio e fim
+  const [startDate, setStartDate] = useState({  dateStart: formatarData(new Date(new Date().setDate(new Date().getDate() - 30)))});
+  const [endDate, setEndDate] = useState({dateEnd: formatarData(new Date())}); 
  
   useEffect(() => {
-    //readExits();
-    readCategories();
-    fetchFinancialSummary(); // Busca as somas de entradas e saídas
+    readDates();
+    //fetchFinancialSummary(); // Busca as somas de entradas e saídas
   }, []);
  
-  async function createExit() {
-    const { data: dU, error: eU } = await supabase.auth.getUser();
-    const uid = dU?.user?.id;
-    if (!uid) nav('/login', { replace: true });
- 
-    const { data, error } = await supabase
-      .from('exits')
-      .insert({ ...exit, user_id: uid });
-    //readExits();
-    fetchFinancialSummary(); // Atualiza os totais após a inserção
-  }
- 
-  async function readCategories() {
-    let { data: dataCategories, error } = await supabase
-      .from('categories')
-      .select('*');
-    setCategorie(dataCategories);
-  }
- 
-  async function readDates(filtro) {
-    console.log(startDate.dateStart, endDate.dateEnd)
+  async function readDates() {
+
+    console.log(startDate);
+
     const { data: dataResult, error } = await supabase
       .from('combined_transactions')
       .select('*')
       .gte('date', startDate.dateStart)   // data maior ou igual a startDate
-      .lte('date', endDate.dateEnd);    // data menor ou igual a endDate
+      .lte('date', endDate.dateEnd)
+      .order('date', {ascending: false})    // data menor ou igual a endDate
 
-    console.log(dataResult)
+    if (error) {
+      console.error('Erro ao buscar dados:', error);
+      return;
+    }
 
+    // Junta os dados dos dias iguais
+    const processedData = dataResult.reduce((acc, item) => {
+      const { date, value, category_entry } = item;
+      
+      // Verifica se a data já existe no acumulador
+      const existing = acc.find((entry) => entry.date === date);
+  
+      if (existing) {
+        // Se a data já existir, somamos o valor de entrada ou saída
+        if (category_entry) {
+          existing.entries += value;  // Soma as entradas
+        } else {
+          existing.exits += value;    // Soma as saídas
+        }
+      } else {
+        // Caso contrário, cria uma nova entrada para a data
+        acc.push({
+          date,
+          entries: category_entry ? value : 0,
+          exits: category_entry ? 0 : value,
+        });
+      }
+  
+      return acc;
+    }, []);
+
+    setSummary(processedData);
+
+  }
+
+  // Função para formatar a data no formato ano-mês-dia
+  function formatarData(data) {
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam de 0
+    const dia = String(data.getDate()).padStart(2, '0');
+    return `${ano}-${mes}-${dia}`;
   }
  
   // Função para buscar as somas das entradas e saídas
@@ -81,7 +101,7 @@ function Screen() {
       return acc + parseFloat(entry.value || 0);
     }, 0);
  
-    setEntriesTotal(totalEntries);
+    //setEntriesTotal(totalEntries);
  
     // Somar saídas
     const { data: exitData, error: exitError } = await supabase
@@ -97,16 +117,18 @@ function Screen() {
       return acc + parseFloat(exit.value || 0);
     }, 0);
  
-    setExitsTotal(totalExits);
+    //setExitsTotal(totalExits);
+
   }
  
   return (
     <div className="screen">
+
       <h2>Inicio</h2>
  
       <div className="pesquisar">
-        <Input type="date" placeholder="Data inicial" onChange={setStartDate} objeto={exit} campo="dateStart" />
-        <Input type="date" placeholder="Data final" onChange={setEndDate} objeto={exit} campo="dateEnd" />
+        <Input type="date" placeholder="Data inicial" onChange={setStartDate} objeto={startDate} campo="dateStart" />
+        <Input type="date" placeholder="Data final" onChange={setEndDate} objeto={endDate} campo="dateEnd" />
         <button onClick={() => readDates()}>Pesquisar</button>
       </div>
  
@@ -114,17 +136,24 @@ function Screen() {
         <table className="exitTable" border="1" cellpadding="5" cellspacing="0">
           <thead>
             <tr>
+              <th>Data</th>
               <th>Entradas</th>
               <th>Saídas</th>
               <th>Saldo</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>R$ {(entriesTotal).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
-              <td>R$ {(exitsTotal).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
-              <td>R$ {(entriesTotal - exitsTotal).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td> {/* Calculando o saldo */}
-            </tr>
+          {
+            summary.map(
+              s =>
+                <tr>
+                  <td> {s.date.split("-").reverse().join("/")} </td>
+                  <td>R$ {(s.entries).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
+                  <td>R$ {(s.exits).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td>
+                  <td>R$ {(s.entries - s.exits).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</td> {/* Calculando o saldo */}
+                </tr>
+            )
+          }
           </tbody>
         </table>
       </div>
