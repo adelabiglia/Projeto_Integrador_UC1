@@ -374,3 +374,55 @@ nav a:hover {
   background: #388e3c;
   transform: scale(1.05);
 }
+
+
+/* ----------- Página inicial tela Screen ---------------- */
+.screenContent{
+  width: 700px;
+  margin: 50px;
+  margin: 50px auto;
+}
+
+.screenDeck{
+  gap: 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.screenCard{
+  padding: 20px 40px;
+  font-size: 25px;
+  width: 100%;
+  margin: 10px;
+}
+
+.screenCard h2{
+  font-size: 20px;
+}
+.screen span{
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.cardEntrada{
+  box-shadow: 1px 2px 3px #198754;
+  background-color: #20c99722;
+}
+.cardEntrada svg{
+  color: #198754;
+}
+.cardSaida{
+  box-shadow: 1px 2px 3px #dc3545;
+  background-color: #dc354522;
+}
+.cardSaida svg{
+  color: #dc3545;
+}
+.cardSaldo{
+  box-shadow: 1px 2px 3px #ffc107;
+  background-color: #ffc10722;
+}
+.cardSaldo svg{
+  color: #dda602;
+}
