@@ -42,10 +42,10 @@ function App() {
             <div className="nav-links">
               <Link to="/screen">Inicio</Link>
               <Link to="/home">Lançamentos</Link>
-              <Link to="/entry">Entradas</Link>
+              {/* <Link to="/entry">Entradas</Link> */}
               <Link to="/categories">Categorias</Link>
               <Link to="/panel">Painel</Link>
-              <Link to="/exit">Saídas</Link>
+              {/* <Link to="/exit">Saídas</Link> */}
             </div>
       
             {/* Avatar com dropdown */}
