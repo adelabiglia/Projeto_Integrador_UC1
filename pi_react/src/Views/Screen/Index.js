@@ -64,6 +64,8 @@ function Screen() {
         lastDay: lastDay.toISOString().split("T")[0],    // Formato "YYYY-MM-DD"
     };
   }
+  
+  const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
   function calculaBalanco(entradasSaidas) {
     // Inicializando as variáveis de entradas, saídas e saldo
@@ -84,10 +86,10 @@ function Screen() {
     const saldo = entradas - saidas;
 
     // Pegando o mês atual
-    const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    
     const today = new Date();
     const monthName = months[today.getMonth()];  // Pegando o nome do mês
-
+    
     // Retornando o objeto com as informações
     return {
         entradas,
@@ -96,6 +98,24 @@ function Screen() {
         mes: monthName  // Incluindo o nome do mês
     };
 }
+const mesPorExtenso = (mes) => {
+      
+  return months[mes - 1]; // Meses no input começam em 1, então ajustamos aqui
+};
+
+const formatarData = () => {
+  let dataDeBusca = total.date || pegaDataAtual(); // Usa `pegaDataAtual` caso `total.date` esteja indefinido
+
+  if (!dataDeBusca || typeof dataDeBusca !== 'string' || !dataDeBusca.includes('-')) {
+    // Se dataDeBusca não for uma string válida no formato "YYYY-MM", retorna vazio
+    return '';
+  }
+
+  const [year, month] = dataDeBusca.split("-").map(Number);
+  const mesNome = mesPorExtenso(month); // Converte para o nome do mês
+  return `${mesNome} de ${year}`;
+};
+
 
 function pegaDataAtual() {
   const today = new Date();
@@ -123,20 +143,20 @@ function pegaDataAtual() {
           total != 0 ?
             <div className='screenContent'>
 
-              <h2>{total.mes}</h2>
+              <h2>{formatarData()}</h2>
 
               <div className="screenDeck">
 
                 <div className="screenCard cardEntrada">
                   <p><i class="fa-solid fa-square-plus"></i></p>
                   <h2>Entradas</h2>
-                  <p><small style={{color: "#777"}}>R$</small> <span>{total.entradas.toFixed(2)}</span></p>
+                  <p><small style={{color: "#777"}}>R$</small> <span>{total?.entradas?.toFixed(2)}</span></p>
                 </div>
 
                 <div className="screenCard cardSaida">
                   <p><i class="fa-solid fa-square-minus"></i></p>
                   <h2>Saídas</h2>
-                  <p><small style={{color: "#777"}}>R$</small> <span>{total.saidas.toFixed(2)}</span></p>
+                  <p><small style={{color: "#777"}}>R$</small> <span>{total?.saidas?.toFixed(2)}</span></p>
                 </div>
 
               </div>
@@ -145,7 +165,7 @@ function pegaDataAtual() {
                 <div className="screenCard cardSaldo">
                     <p><i class="fa-solid fa-coins"></i></p>
                     <h2>Saldo</h2>
-                    <p><small style={{color: "#777"}}>R$</small> <span>{total.saldo.toFixed(2)}</span></p>
+                    <p><small style={{color: "#777"}}>R$</small> <span>{total?.saldo?.toFixed(2)}</span></p>
                 </div>
               </div>
 
