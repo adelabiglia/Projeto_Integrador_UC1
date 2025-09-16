@@ -18,7 +18,6 @@ export default function Categories(){
   
       name: "",
       meta: "",
-      image: "",
       user_id: "",
 
   })
@@ -71,8 +70,7 @@ export default function Categories(){
 
       <input type="text"  value={categorie.name} placeholder='Digite seu nome' onChange={(e) => setCategorie({...categorie, name: e.target.value})}/>     
       <input type="text"  value={categorie.meta} placeholder='Digite sua meta' onChange={(e) => setCategorie({...categorie, meta: e.target.value})}/>    
-      <input type="text"  value={categorie.url} placeholder='http://exemple.com' onChange={(e) => setCategorie({...categorie, image: e.target.value})}/>  
-
+      
       <button onClick={createCategorie}> Salvar </button>  
 
     </form>
