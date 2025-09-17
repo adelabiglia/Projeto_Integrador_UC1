@@ -22,12 +22,17 @@ function Screen() {
   async function buscaData(){
 
     let dataDeBusca = total;
-
+    console.log(dataDeBusca)
     if(dataDeBusca == 0){
       dataDeBusca = pegaDataAtual()
+      console.log("pegou data atual")
     }else{
       dataDeBusca = dataDeBusca.date
+      console.log("pegou data vigente")
+
     }
+    console.log(dataDeBusca)
+
 
     const todosDias = pegaPrimeiroEUltimoDiaDoMes(dataDeBusca)
     const inicioMes = todosDias.firstDay
@@ -87,15 +92,13 @@ function Screen() {
 
     // Pegando o mês atual
     
-    const today = new Date();
-    const monthName = months[today.getMonth()];  // Pegando o nome do mês
     
     // Retornando o objeto com as informações
     return {
         entradas,
         saidas,
         saldo,
-        mes: monthName  // Incluindo o nome do mês
+        date: total.date? total.date :  pegaDataAtual()  // Incluindo o nome do mês
     };
 }
 const mesPorExtenso = (mes) => {
@@ -104,7 +107,10 @@ const mesPorExtenso = (mes) => {
 };
 
 const formatarData = () => {
-  let dataDeBusca = total.date || pegaDataAtual(); // Usa `pegaDataAtual` caso `total.date` esteja indefinido
+  
+  let dataDeBusca = total.date 
+  if(!dataDeBusca)
+    dataDeBusca = pegaDataAtual(); // Usa `pegaDataAtual` caso `total.date` esteja indefinido
 
   if (!dataDeBusca || typeof dataDeBusca !== 'string' || !dataDeBusca.includes('-')) {
     // Se dataDeBusca não for uma string válida no formato "YYYY-MM", retorna vazio
@@ -120,7 +126,7 @@ const formatarData = () => {
 function pegaDataAtual() {
   const today = new Date();
   const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Adiciona o 0 à frente se o mês for um dígito único
+  const month = (today.getMonth()+ 1).toString().padStart(2, '0'); // Adiciona o 0 à frente se o mês for um dígito único
   return `${year}-${month}`;
 }
 
