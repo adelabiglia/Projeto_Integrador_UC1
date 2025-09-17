@@ -1,35 +1,27 @@
-function Input({
+// src/Components/Input.jsx
 
-    type,
-    placeholder,
-    onChange,
-    className,
-    label,
-    objeto, 
-    campo
-    }) {
-
+export function Input({ type, placeholder, onChange, objeto, campo, value, min, max }) {
+    const handleChange = (e) => {
+      const val = e.target.value;
+  
+      if (objeto && campo) {
+        // Atualiza um campo dentro de um objeto (ex: categorie.name)
+        onChange(prev => ({ ...prev, [campo]: val }));
+      } else {
+        // Atualiza um valor simples (ex: month ou year)
+        onChange(val);
+      }
+    };
+  
     return (
-        <>
-            { label &&
-                (
-             <label>{label} :</label>
-            )}
-
-            <input 
-            value={objeto[campo]}
-            type={type}
-            placeholder={placeholder}
-            onChange={(e) => onChange({...objeto, [campo]: e.target.value})}
-            className={className}
-            
-            
-            
-            />
-                
-        </>
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={objeto && campo ? objeto[campo] : value || ''}
+        onChange={handleChange}
+        min={min}
+        max={max}
+      />
     );
-
-}
-
-export {Input};
+  }
+  

@@ -9,6 +9,27 @@ const supabaseUrl = "https://kvuxqtwfmqnookboncos.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dXhxdHdmbXFub29rYm9uY29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQzNTA4NjIsImV4cCI6MjA2OTkyNjg2Mn0.n2F4uWJuIxu17qjEfHHFmv3Kg9uq5con54ys3E3Al9g";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+const meses = [
+  { value: 1, label: 'Janeiro' },
+  { value: 2, label: 'Fevereiro' },
+  { value: 3, label: 'Março' },
+  { value: 4, label: 'Abril' },
+  { value: 5, label: 'Maio' },
+  { value: 6, label: 'Junho' },
+  { value: 7, label: 'Julho' },
+  { value: 8, label: 'Agosto' },
+  { value: 9, label: 'Setembro' },
+  { value: 10, label: 'Outubro' },
+  { value: 11, label: 'Novembro' },
+  { value: 12, label: 'Dezembro' },
+];
+
+const anos = [];
+const anoAtual = new Date().getFullYear();
+for (let i = anoAtual - 10; i <= anoAtual + 10; i++) {
+  anos.push(i);
+}
+
 export default function Categories() {
   const nav = useNavigate();
 
@@ -20,11 +41,18 @@ export default function Categories() {
 
   const [categories, setCategories] = useState([]);
   const [valoresPorCategoria, setValoresPorCategoria] = useState({});
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     readCategories();
     calcularValoresPorCategoria();
-  }, []);
+  }, [month, year]);
+
+  // Atualiza campo da categoria no formulário
+  function handleCategorieChange(field, value) {
+    setCategorie(prev => ({ ...prev, [field]: value }));
+  }
 
   async function createCategorie() {
     const { data: dataUser, error: errorUser } = await supabase.auth.getUser();
@@ -60,7 +88,7 @@ export default function Categories() {
       alert("Erro ao deletar: " + error.message);
     } else {
       setCategories(prev => prev.filter(cat => cat.id !== id));
-      calcularValoresPorCategoria(); // Atualiza valores
+      calcularValoresPorCategoria();
     }
   }
 
@@ -81,15 +109,27 @@ export default function Categories() {
 
     const uid = userData.user.id;
 
+    const startDate = new Date(year, month - 1, 1);
+    const nextMonth = month === 12 ? 1 : month + 1;
+    const nextYear = month === 12 ? year + 1 : year;
+    const endDate = new Date(nextYear, nextMonth - 1, 1);
+
+    const formattedStartDate = startDate.toISOString().split('T')[0];
+    const formattedEndDate = endDate.toISOString().split('T')[0];
+
     const { data: entradas } = await supabase
       .from('entries')
-      .select('value, category_id')
-      .eq('user_id', uid);
+      .select('value, category_id, created_at')
+      .eq('user_id', uid)
+      .gte('created_at', formattedStartDate)
+      .lt('created_at', formattedEndDate);
 
     const { data: saidas } = await supabase
       .from('exits')
-      .select('value, category_id')
-      .eq('user_id', uid);
+      .select('value, category_id, created_at')
+      .eq('user_id', uid)
+      .gte('created_at', formattedStartDate)
+      .lt('created_at', formattedEndDate);
 
     const valores = {};
 
@@ -100,7 +140,7 @@ export default function Categories() {
 
     saidas?.forEach(({ category_id, value }) => {
       if (!valores[category_id]) valores[category_id] = 0;
-      valores[category_id] -= Number(value);
+      valores[category_id] = Number(value);
     });
 
     setValoresPorCategoria(valores);
@@ -108,11 +148,34 @@ export default function Categories() {
 
   return (
     <div className="screen">
-
       <Form func={createCategorie} title="Cadastrar Categoria">
-        <Input type="text" placeholder='Digite a categoria' onChange={setCategorie} objeto={categorie} campo='name' />
-        <Input type="text" placeholder='Digite sua meta' onChange={setCategorie} objeto={categorie} campo='meta' />
+        <Input
+          type="text"
+          placeholder="Digite a categoria"
+          value={categorie.name}
+          onChange={e => handleCategorieChange('name', e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Digite sua meta"
+          value={categorie.meta}
+          onChange={e => handleCategorieChange('meta', e.target.value)}
+        />
       </Form>
+
+      <div className="filter" style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        <select value={month} onChange={e => setMonth(Number(e.target.value))}>
+          {meses.map(m => (
+            <option key={m.value} value={m.value}>{m.label}</option>
+          ))}
+        </select>
+
+        <select value={year} onChange={e => setYear(Number(e.target.value))}>
+          {anos.map(a => (
+            <option key={a} value={a}>{a}</option>
+          ))}
+        </select>
+      </div>
 
       <div className='row'>
         {categories.map(c => (
