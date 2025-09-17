@@ -36,7 +36,7 @@ function Form({
                         </Spinner>
 
                     ):(
-                        <>Salvar</>
+                        <>Entrar</>
 
                     )}
                 </Button>
