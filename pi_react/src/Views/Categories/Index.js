@@ -100,7 +100,7 @@ export default function Categories() {
 
     saidas?.forEach(({ category_id, value }) => {
       if (!valores[category_id]) valores[category_id] = 0;
-      valores[category_id] = Number(value);
+      valores[category_id] += Number(value);
     });
 
     setValoresPorCategoria(valores);
