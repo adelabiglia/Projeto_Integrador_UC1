@@ -16,6 +16,7 @@ export default function Categories() {
     name: "",
     meta: "",
     user_id: "",
+    entry: false // Define the initial value as 'false' for "saida"
   });
 
   const [categories, setCategories] = useState([]);
@@ -34,7 +35,11 @@ export default function Categories() {
 
     await supabase
       .from('categories')
-      .insert({ ...categorie, user_id: uid });
+      .insert({
+        ...categorie,
+        user_id: uid,
+        entry: categorie.entry // Save the entry type (TRUE or FALSE)
+      });
 
     readCategories();
     calcularValoresPorCategoria();
@@ -108,8 +113,15 @@ export default function Categories() {
 
   return (
     <div className="screen">
-
       <Form func={createCategorie} title="Cadastrar Categoria">
+        <select 
+          value={categorie.entry ? "entrada" : "saida"} 
+          onChange={(e) => setCategorie({ ...categorie, entry: e.target.value === "entrada" })}
+        >
+          <option value="entrada">Entrada</option>
+          <option value="saida">Saída</option>
+        </select>
+
         <Input type="text" placeholder='Digite a categoria' onChange={setCategorie} objeto={categorie} campo='name' />
         <Input type="text" placeholder='Digite sua meta' onChange={setCategorie} objeto={categorie} campo='meta' />
       </Form>
@@ -118,14 +130,8 @@ export default function Categories() {
         {categories.map(c => (
           <div className='cardGame' key={c.id}>
             <p><strong>Nome:</strong> {c.name}</p>
-
             <p><strong>Meta:</strong> {Number(c.meta).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
-
-            <p><strong>Valor Atingido:</strong> {Number(valoresPorCategoria[c.id] || 0).toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            })}</p>
-
+            <p><strong>Valor Atingido:</strong> {Number(valoresPorCategoria[c.id] || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
             <progress value={valoresPorCategoria[c.id] || 0} max={c.meta}></progress>
             <p>{((valoresPorCategoria[c.id] || 0) / c.meta * 100).toFixed(1)}%</p>
 
