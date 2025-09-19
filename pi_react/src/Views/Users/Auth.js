@@ -23,7 +23,7 @@ function Auth() {
     city: "",
     email: "",
     password: "",
-    plan: "free",  // Novo campo para armazenar o plano
+    plan: "free",
   });
 
   async function logar() {
@@ -73,85 +73,32 @@ function Auth() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <button className='buttonSucess auth-button' onClick={() => setIslogin(!isLogin)} >
-          {isLogin && ("Cadastrar-se")}
-          {!isLogin && ("Voltar para o Login")}
+        <button 
+          className='buttonSucess auth-button' 
+          onClick={() => setIslogin(!isLogin)} 
+        >
+          {isLogin ? "Cadastrar-se" : "Voltar para o Login"}
         </button>
         <br/><br/>
 
         {!isLogin && (
           <Form func={register} className="auth-input"> 
-            <Input 
-              label="Nome"
-              type="text"
-              placeholder="Digite Seu Nome Completo"
-              onChange={setUser}
-              objeto={user}
-              campo="name"
-            /><br/>
-
-            <Input
-              label="Data de Nascimento"
-              type="text"
-              placeholder="Digite Sua Data de Nascimento" 
-              onChange={setUser}
-              objeto={user}
-              campo="birth"
-            /><br/>
-
-            <Input 
-              label="Endereço"
-              type="text" 
-              placeholder="Digite Seu Endereço" 
-              onChange={setUser} 
-              objeto={user}
-              campo="address"
-            /><br/>
-
-            <Input 
-              label="Número"
-              type="text"  
-              placeholder="Digite o Número da Sua Residência " 
-              onChange={setUser} 
-              objeto={user}
-              campo="number"
-            /><br/>
-
-            <Input 
-              label="Bairro"
-              type="text" 
-              placeholder="Digite Seu Bairro"
-              onChange={setUser} 
-              objeto={user}
-              campo="neighborhood"
-            /><br/>
-
-            <Input 
-              label="Cidade"
-              type="text"  
-              placeholder="Digite Sua Cidade" 
-              onChange={setUser} 
-              objeto={user}
-              campo="city"
-            /><br/>
-
-            <Input 
-              label="Email"
-              type="text"  
-              placeholder="Digite seu Email" 
-              onChange={setUser}
-              objeto={user}
-              campo="email"  
-            /><br/>
-
-            <Input 
-              label="Senha"
-              type="password" 
-              placeholder="Digite Sua Senha" 
-              onChange={setUser} 
-              objeto={user}
-              campo="password"
-            /><br/>
+            <Input label="Nome" type="text" placeholder="Digite Seu Nome Completo"
+              onChange={setUser} objeto={user} campo="name" /><br/>
+            <Input label="Data de Nascimento" type="text" placeholder="Digite Sua Data de Nascimento" 
+              onChange={setUser} objeto={user} campo="birth" /><br/>
+            <Input label="Endereço" type="text" placeholder="Digite Seu Endereço"
+              onChange={setUser} objeto={user} campo="address" /><br/>
+            <Input label="Número" type="text" placeholder="Digite o Número da Sua Residência "
+              onChange={setUser} objeto={user} campo="number" /><br/>
+            <Input label="Bairro" type="text" placeholder="Digite Seu Bairro"
+              onChange={setUser} objeto={user} campo="neighborhood" /><br/>
+            <Input label="Cidade" type="text" placeholder="Digite Sua Cidade"
+              onChange={setUser} objeto={user} campo="city" /><br/>
+            <Input label="Email" type="text" placeholder="Digite seu Email"
+              onChange={setUser} objeto={user} campo="email" /><br/>
+            <Input label="Senha" type="password" placeholder="Digite Sua Senha"
+              onChange={setUser} objeto={user} campo="password" /><br/>
 
             {/* Selecione o plano */}
             <label>Escolha o Plano:</label><br />
@@ -169,28 +116,47 @@ function Auth() {
 
         {isLogin && (
           <Form func={logar} >
-            <Input 
-              label="Digite seu Email"
-              type="email" 
-              placeholder="Digite Seu Email" 
-              onChange={setUser} 
-              objeto={user}
-              campo="email"
-            /><br/>
-
-            <Input
-              label="Digite Sua Senha"
-              type="password" 
-              placeholder="Digite Sua Senha" 
-              onChange={setUser} 
-              objeto={user}
-              campo="password"
-            /><br/>
+            <Input label="Digite seu Email" type="email" placeholder="Digite Seu Email"
+              onChange={setUser} objeto={user} campo="email" /><br/>
+            <Input label="Digite Sua Senha" type="password" placeholder="Digite Sua Senha"
+              onChange={setUser} objeto={user} campo="password" /><br/>
           </Form>
+        )}
+
+        {/* Aviso sobre o plano Free - somente abaixo do login */}
+        {isLogin && (
+          <p className="free-warning">
+            ⚠️ O plano <strong>Free</strong> é válido apenas por 7 dias para teste.
+          </p>
         )}
       </div>
 
-      {msg && (<div className='auth-toast'>{msg} </div>)}     
+      {/* ---- Cards de Planos ---- */}
+      <div className="plans-container">
+        <div className="plan-card">
+          <h3>Plano Premium</h3>
+          <p className="price">R$ 29,90 / mês</p>
+          <ul>
+            <li>Acesso ilimitado</li>
+            <li>Suporte dedicado</li>
+            <li>Relatórios financeiros</li>
+          </ul>
+        </div>
+
+        <div className="plan-card highlight">
+          <h3>Plano Gold</h3>
+          <p className="price">
+            R$ 180,00 / ano <span className="discount">(-50%)</span>
+          </p>
+          <ul>
+            <li>Tudo do Premium</li>
+            <li>Economia anual garantida</li>
+            <li>Benefícios exclusivos</li>
+          </ul>
+        </div>
+      </div>
+
+      {msg && (<div className='auth-toast'>{msg}</div>)}     
     </div>
   ); 
 }
